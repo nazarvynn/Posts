@@ -1,19 +1,24 @@
 import React from 'react';
-import './App.scss';
+import styled from 'styled-components';
+
+import Header from '../components/Header/Header';
+import Posts from '../pages/Posts/Posts';
+import Footer from '../components/Footer/Footer';
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <Wrapper className="App">
+            <Header />
+            <Posts />
+            <Footer />
+        </Wrapper>
     );
 }
+
+const Wrapper = styled.div`
+    position: relative;
+    min-height: 100vh;
+    padding: 56px 0 0;
+`;
 
 export default App;
