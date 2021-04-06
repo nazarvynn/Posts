@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from './Logo/Logo';
-import Navigation from './Navigation/Navigation';
+import MainNavigation from './MainNavigation/MainNavigation';
 
 export default function Header() {
     return (
@@ -8,7 +8,7 @@ export default function Header() {
             <nav className="navbar navbar-expand navbar-dark bg-dark">
                 <div className="container">
                     <Logo />
-                    <Navigation />
+                    <MainNavigation />
                 </div>
             </nav>
         </header>

@@ -1,39 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import * as PropTypes from 'prop-types';
 
-export default function Categories() {
+import { Category } from '../../core/models';
+import { CATEGORIES } from '../../core/const';
+import chunks from '../../utils/chunks';
+
+export default function Categories({ chunkSize = 3 }: { chunkSize: number }) {
     return (
-        <div className="card my-4">
-            <h5 className="card-header">Categories</h5>
-            <div className="card-body">
-                <div className="row">
-                    <div className="col-lg-6">
-                        <ul className="list-unstyled mb-0">
-                            <li>
-                                <a href="#">Web Design</a>
+        <div className="row">
+            {chunks(CATEGORIES, chunkSize).map((chunk: any, chunkIndex) => (
+                <div className="col-lg-6" key={chunkIndex}>
+                    <ul className="list-unstyled mb-0">
+                        {chunk.map(({ label, link }: Category, categoryIndex: number) => (
+                            <li key={categoryIndex}>
+                                <Link to={link}>{label}</Link>
                             </li>
-                            <li>
-                                <a href="#">HTML</a>
-                            </li>
-                            <li>
-                                <a href="#">Freebies</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="col-lg-6">
-                        <ul className="list-unstyled mb-0">
-                            <li>
-                                <a href="#">JavaScript</a>
-                            </li>
-                            <li>
-                                <a href="#">CSS</a>
-                            </li>
-                            <li>
-                                <a href="#">Tutorials</a>
-                            </li>
-                        </ul>
-                    </div>
+                        ))}
+                    </ul>
                 </div>
-            </div>
+            ))}
         </div>
     );
 }
+
+Categories.propTypes = {
+    chunkSize: PropTypes.number,
+};

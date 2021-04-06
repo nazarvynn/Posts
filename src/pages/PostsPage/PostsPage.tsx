@@ -1,14 +1,17 @@
 import React from 'react';
-import Search from '../../components/Search/Search';
-import Categories from '../../components/Categories/Categories';
 
-export default function Posts() {
+import MainLayout from '../../layouts/MainLayout/MainLayout';
+import Loader from '../../components/Loader/Loader';
+
+export default function PostsPage() {
+    const isLoading = false;
+
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-8">
-                    <h1 className="my-4">Posts list</h1>
-
+        <MainLayout>
+            <h1 className="my-4">Posts list</h1>
+            {isLoading && <Loader />}
+            {!isLoading && (
+                <>
                     <div className="card mb-4">
                         <img className="card-img-top" src="http://placehold.it/750x300" alt="Card image cap" />
                         <div className="card-body">
@@ -27,7 +30,6 @@ export default function Posts() {
                             <a href="#">Start Bootstrap</a>
                         </div>
                     </div>
-
                     <div className="card mb-4">
                         <img className="card-img-top" src="http://placehold.it/750x300" alt="Card image cap" />
                         <div className="card-body">
@@ -46,7 +48,6 @@ export default function Posts() {
                             <a href="#">Start Bootstrap</a>
                         </div>
                     </div>
-
                     <div className="card mb-4">
                         <img className="card-img-top" src="http://placehold.it/750x300" alt="Card image cap" />
                         <div className="card-body">
@@ -65,7 +66,6 @@ export default function Posts() {
                             <a href="#">Start Bootstrap</a>
                         </div>
                     </div>
-
                     <ul className="pagination justify-content-center mb-4">
                         <li className="page-item">
                             <a className="page-link" href="#">
@@ -78,13 +78,8 @@ export default function Posts() {
                             </a>
                         </li>
                     </ul>
-                </div>
-
-                <div className="col-md-4">
-                    <Search />
-                    <Categories />
-                </div>
-            </div>
-        </div>
+                </>
+            )}
+        </MainLayout>
     );
 }
