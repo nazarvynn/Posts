@@ -7,12 +7,24 @@ import PostContent from './PostContent/PostContent';
 import CommentForm from './CommentForm/CommentForm';
 import CommentList from './CommentList/CommentList';
 import { PostStub, CommentsStub } from '../../stubs';
+import { Comment } from '../../core/models';
 
 export default function PostPage() {
     const isPostLoading = false;
     const isCommentsLoading = false;
-    const { id } = useParams() as any;
-    console.log('id', id);
+    const { id: postId } = useParams() as any;
+    console.log('postId', postId);
+
+    const onCommentFormSubmit = (text: string) => {
+        const comment: Comment = {
+            name: 'user',
+            body: text,
+            post: {
+                id: postId,
+            },
+        };
+        console.log('comment', comment);
+    };
 
     return (
         <MainLayout>
@@ -21,7 +33,7 @@ export default function PostPage() {
                 <>
                     <PostContent {...PostStub} />
                     <hr />
-                    <CommentForm />
+                    <CommentForm onSubmit={onCommentFormSubmit} />
                     {isCommentsLoading && <Loader />}
                     {!isCommentsLoading && <CommentList comments={CommentsStub} />}
                 </>
