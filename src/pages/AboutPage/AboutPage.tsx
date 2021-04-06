@@ -9,7 +9,18 @@ export default function AboutPage() {
         <MainLayout>
             <h1 className="my-4">About</h1>
             {isLoading && <Loader />}
-            {!isLoading && <>About Content</>}
+            {!isLoading && (
+                <>
+                    <p>This is an example of application with the next parts</p>
+                    <ul>
+                        <li>Posts</li>
+                        <li>Post</li>
+                        <li>Comments</li>
+                        <li>Gallery</li>
+                        <li>Users</li>
+                    </ul>
+                </>
+            )}
         </MainLayout>
     );
 }
