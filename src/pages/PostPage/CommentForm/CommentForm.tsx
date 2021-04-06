@@ -1,0 +1,19 @@
+import React from 'react';
+
+export default function CommentForm() {
+    return (
+        <div className="card my-4">
+            <h5 className="card-header">Leave a Comment:</h5>
+            <div className="card-body">
+                <form>
+                    <div className="form-group">
+                        <textarea className="form-control" rows={3} value={'12'} />
+                    </div>
+                    <button type="submit" className="btn btn-primary">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    );
+}
