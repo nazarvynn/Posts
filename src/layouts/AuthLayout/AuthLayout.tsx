@@ -1,7 +1,18 @@
 import React from 'react';
+import * as PropTypes from 'prop-types';
 
-export default function AuthLayout() {
+import './auth.scss';
+
+export default function AuthLayout({ children }: { children: any }) {
     return (
-        <div>Users page</div>
+        <div className="auth container">
+            <div className="row">
+                <main className="col-md-12">{children}</main>
+            </div>
+        </div>
     );
 }
+
+AuthLayout.propTypes = {
+    children: PropTypes.any.isRequired,
+};

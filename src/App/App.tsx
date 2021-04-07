@@ -4,8 +4,7 @@ import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import RelayEnvironment from '../relayEnvironment';
 import styled from 'styled-components';
 
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
+import LoginPage from '../pages/LoginPage/LoginPage';
 import PostsPage from '../pages/PostsPage/PostsPage';
 import PostPage from '../pages/PostPage/PostPage';
 import GalleryPage from '../pages/GalleryPage/GalleryPage';
@@ -17,23 +16,26 @@ function App() {
         <RelayEnvironmentProvider environment={RelayEnvironment}>
             <Router>
                 <Wrapper className="App">
-                    <Header />
-                    <div className="main">
-                        <Switch>
-                            <Route path="/" exact render={() => <Redirect to="posts" />} />
-                            <Route path="/posts" exact component={PostsPage} />
-                            <Route path="/posts/:id" component={PostPage} />
-                            <Route path="/gallery" exact component={GalleryPage} />
-                            <Route path="/users" exact component={UsersPage} />
-                            <Route path="/about" exact component={AboutPage} />
-                        </Switch>
-                    </div>
-                    <Footer />
+                    <Switch>
+                        <Route path="/" exact render={Auth} />
+                        <Route path="/auth" exact component={LoginPage} />
+                        <Route path="/posts" exact component={PostsPage} />
+                        <Route path="/posts/:id" component={PostPage} />
+                        <Route path="/gallery" exact component={GalleryPage} />
+                        <Route path="/users" exact component={UsersPage} />
+                        <Route path="/about" exact component={AboutPage} />
+                    </Switch>
                 </Wrapper>
             </Router>
         </RelayEnvironmentProvider>
     );
 }
+
+const Auth = () => {
+    const isUserLoggedIn = false;
+
+    return isUserLoggedIn ? <Redirect to="posts" /> : <Redirect to="auth" />;
+};
 
 const Wrapper = styled.div`
     position: relative;
