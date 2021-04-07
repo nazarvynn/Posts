@@ -1,7 +1,7 @@
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 
 async function fetchGraphQL(text: any, variables: any) {
-    const URL = "https://graphqlzero.almansi.me/api'";
+    const URL = 'https://graphqlzero.almansi.me/api';
     const response = await fetch(URL, {
         method: 'POST',
         headers: {
