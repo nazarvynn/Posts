@@ -4,14 +4,14 @@ import MainLayout from '../../layouts/MainLayout/MainLayout';
 import Loader from '../../components/Loader/Loader';
 import PostsList from './PostsList/PostsList';
 import Pagination from './Pagination/Pagination';
-import { PostsStub } from '../../stubs/posts.stub';
+import { PostsStub } from '../../stubs';
 
 export default function PostsPage() {
     const isLoading = false;
 
     return (
         <MainLayout>
-            <h1 className="my-4">Posts list</h1>
+            <h1 className="my-4">Posts</h1>
             {isLoading && <Loader />}
             {!isLoading && (
                 <>

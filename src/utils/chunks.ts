@@ -1,4 +1,4 @@
-export default function chunks(list: any, chunkSize: number) {
+export default function chunks(list: any, chunkSize: number): any[][] {
     let result = [];
     for (let i = 0; i < list.length; i += chunkSize) {
         result.push(list.slice(i, i + chunkSize));
