@@ -1,7 +1,6 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { graphql } from 'babel-plugin-relay/macro';
-import { loadQuery, usePreloadedQuery } from 'react-relay/hooks';
-import RelayEnvironment from '../../relayEnvironment';
+import { useQueryLoader, usePreloadedQuery } from 'react-relay/hooks';
 
 import MainLayout from '../../layouts/MainLayout/MainLayout';
 import Loader from '../../components/Loader/Loader';
@@ -22,16 +21,23 @@ const PhotoQuery = graphql`
         }
     }
 `;
-const queryReference = loadQuery(RelayEnvironment, PhotoQuery, {
-    options: {
-        paginate: {
-            page: 1,
-            limit: 24,
-        },
-    },
-});
 
 export default function GalleryPage() {
+    const [queryReference, loadQuery, disposeQuery] = useQueryLoader(PhotoQuery);
+    useEffect(() => {
+        loadQuery({
+            options: {
+                paginate: {
+                    page: 1,
+                    limit: 24,
+                },
+            },
+        });
+        return () => {
+            disposeQuery();
+        };
+    }, [loadQuery, disposeQuery]);
+
     return (
         <MainLayout>
             <h1 className="my-4">Gallery</h1>
