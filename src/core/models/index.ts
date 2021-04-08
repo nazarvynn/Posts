@@ -1,3 +1,4 @@
+export * from './AuthData';
 export * from './Category';
 export * from './Comment';
 export * from './MenuItem';

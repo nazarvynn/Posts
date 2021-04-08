@@ -1,19 +1,24 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
+import { useAuth } from '../../auth/hooks';
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 import LoginForm from './LoginForm/LoginForm';
-import { USERS } from '../../core/const';
+import { AuthData } from '../../core/models';
 import './loginPage.scss';
 
 export default function LoginPage() {
+    const auth = useAuth();
+    const location = useLocation();
     const history = useHistory();
+    const { from } = (location.state as any) || { from: { pathname: '/posts' } };
 
-    const onLogin = ({ userName, password }: { userName: string; password: string }) => {
-        const user = USERS.find(({ userName: user }) => user === userName);
-        if (password === user?.password) {
-            history.push('/posts');
-        }
+    const onLogin = (authData: AuthData) => {
+        auth.login(authData)
+            .then(() => {
+                history.replace(from);
+            })
+            .catch(() => {});
     };
 
     return (

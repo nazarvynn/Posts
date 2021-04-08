@@ -11,8 +11,7 @@ export const USER_MENU: MenuItem[] = [
         type: MenuType.DIVIDER,
     },
     {
-        type: MenuType.LINK,
+        type: MenuType.LOGOUT,
         label: 'logout',
-        path: '/auth',
     },
 ];
