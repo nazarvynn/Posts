@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as PropTypes from 'prop-types';
 
 import Header from '../../components/Header/Header';
@@ -9,6 +9,9 @@ import Categories from '../../components/Categories/Categories';
 import './main.scss';
 
 export default function MainLayout({ children }: { children: any }) {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <>
             <Header />

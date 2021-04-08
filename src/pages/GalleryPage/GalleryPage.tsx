@@ -5,6 +5,7 @@ import MainLayout from '../../layouts/MainLayout/MainLayout';
 import Loader from '../../components/Loader/Loader';
 import GalleryList from './GalleryList/GalleryList';
 import { GalleryPageQuery } from '../../relay/queries';
+// import { useRelayQuery } from '../../relay/hooks';
 
 export default function GalleryPage() {
     const [queryReference, loadQuery, disposeQuery] = useQueryLoader(GalleryPageQuery);
@@ -21,6 +22,8 @@ export default function GalleryPage() {
             disposeQuery();
         };
     }, [loadQuery, disposeQuery]);
+
+    // const queryReference = useRelayQuery(GalleryPageQuery, { paginate: { page: 1, limit: 24 } });
 
     return (
         <MainLayout>
