@@ -1,45 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+
+const LoginFormSchema = Yup.object().shape({
+    // Example:
+    // firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+    // email: Yup.string().email('Invalid email').required('Required'),
+    userName: Yup.string().required('Required'),
+    password: Yup.string().required('Required'),
+});
 
 export default function LoginForm({ onLogin }: { onLogin: any }) {
-    const [authData, setAuthData] = useState({ userName: '', password: '' });
-
-    const onSubmit = (event: any) => {
-        event.preventDefault();
-        onLogin(authData);
-        setAuthData({ userName: '', password: '' });
-    };
-    const onChange = (event: any) => {
-        const { name, value } = event.target;
-        setAuthData({ ...authData, [name]: value });
-    };
-
     return (
-        <form onSubmit={(event) => event.preventDefault()}>
-            <div className="form-group">
-                <label>User name</label>
-                <input
-                    type="text"
-                    value={authData.userName}
-                    name="userName"
-                    className="form-control"
-                    onChange={onChange}
-                />
-            </div>
-            <div className="form-group">
-                <label>Password</label>
-                <input
-                    type="password"
-                    value={authData.password}
-                    name="password"
-                    className="form-control"
-                    onChange={onChange}
-                />
-            </div>
-            <button type="button" className="btn btn-primary btn-lg btn-block submit-button" onClick={onSubmit}>
-                Submit
-            </button>
-        </form>
+        <Formik initialValues={{ userName: '', password: '' }} validationSchema={LoginFormSchema} onSubmit={onLogin}>
+            {({ errors, touched }) => {
+                const isInvalidUserName = errors.userName && touched.userName;
+                const isInvalidPassword = errors.password && touched.password;
+                return (
+                    <Form>
+                        <div className="form-group">
+                            <label>User name</label>
+                            <Field name="userName" className={`form-control ${isInvalidUserName && 'is-invalid'}`} />
+                            {isInvalidUserName && <div className="invalid-feedback">{errors.userName}</div>}
+                        </div>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <Field
+                                name="password"
+                                type="password"
+                                className={`form-control ${isInvalidPassword && 'is-invalid'}`}
+                            />
+                            {isInvalidPassword && <div className="invalid-feedback">{errors.password}</div>}
+                        </div>
+                        <button type="submit" className="btn btn-primary btn-lg btn-block submit-button">
+                            Submit
+                        </button>
+                    </Form>
+                );
+            }}
+        </Formik>
     );
 }
 
