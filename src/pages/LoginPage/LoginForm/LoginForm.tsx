@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import * as PropTypes from 'prop-types';
 
 export default function LoginForm({ onLogin }: { onLogin: any }) {
-    const [state, setAuthData] = useState({ userName: '', password: '' });
+    const [authData, setAuthData] = useState({ userName: '', password: '' });
 
     const onSubmit = (event: any) => {
         event.preventDefault();
-        onLogin(state);
+        onLogin(authData);
         setAuthData({ userName: '', password: '' });
     };
     const onChange = (event: any) => {
         const { name, value } = event.target;
-        setAuthData({ ...state, [name]: value });
+        setAuthData({ ...authData, [name]: value });
     };
 
     return (
@@ -20,7 +20,7 @@ export default function LoginForm({ onLogin }: { onLogin: any }) {
                 <label>User name</label>
                 <input
                     type="text"
-                    value={state.userName}
+                    value={authData.userName}
                     name="userName"
                     className="form-control"
                     onChange={onChange}
@@ -30,7 +30,7 @@ export default function LoginForm({ onLogin }: { onLogin: any }) {
                 <label>Password</label>
                 <input
                     type="password"
-                    value={state.password}
+                    value={authData.password}
                     name="password"
                     className="form-control"
                     onChange={onChange}

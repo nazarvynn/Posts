@@ -1,12 +1,19 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 import LoginForm from './LoginForm/LoginForm';
+import { USERS } from '../../core/const';
 import './loginPage.scss';
 
 export default function LoginPage() {
+    const history = useHistory();
+
     const onLogin = ({ userName, password }: { userName: string; password: string }) => {
-        console.log(userName, password);
+        const user = USERS.find(({ userName: user }) => user === userName);
+        if (password === user?.password) {
+            history.push('/posts');
+        }
     };
 
     return (
