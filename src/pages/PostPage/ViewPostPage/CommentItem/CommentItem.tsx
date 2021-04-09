@@ -1,7 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { Comment } from '../../../core/models';
+import { Comment } from '../../../../core/models';
 
 export default function CommentItem({ name, body }: Comment) {
     return (

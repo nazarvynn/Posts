@@ -6,7 +6,7 @@ import AuthComponent from '../auth/AuthComponent';
 import PrivateRoute from '../auth/PrivateRoute';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import PostsPage from '../pages/PostsPage/PostsPage';
-import PostPage from '../pages/PostPage/PostPage';
+import { CreatePostPage, UpdatePostPage, ViewPostPage } from '../pages/PostPage';
 import GalleryPage from '../pages/GalleryPage/GalleryPage';
 import UsersPage from '../pages/UsersPage/UsersPage';
 import AboutPage from '../pages/AboutPage/AboutPage';
@@ -25,7 +25,13 @@ export default function AppRouter() {
                         <PostsPage />
                     </PrivateRoute>
                     <PrivateRoute path="/posts/:id">
-                        <PostPage />
+                        <ViewPostPage />
+                    </PrivateRoute>
+                    <PrivateRoute path="/create-post" exact>
+                        <CreatePostPage />
+                    </PrivateRoute>
+                    <PrivateRoute path="/update-post/:id">
+                        <UpdatePostPage />
                     </PrivateRoute>
                     <PrivateRoute path="/gallery" exact>
                         <GalleryPage />

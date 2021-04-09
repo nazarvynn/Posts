@@ -6,6 +6,10 @@ export const NAVIGATION: NavigationItem[] = [
         path: '/posts',
     },
     {
+        label: 'Create Post',
+        path: '/create-post',
+    },
+    {
         label: 'Gallery',
         path: '/gallery',
     },

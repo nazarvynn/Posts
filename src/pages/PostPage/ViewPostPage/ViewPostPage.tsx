@@ -1,18 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import MainLayout from '../../layouts/MainLayout/MainLayout';
-import Loader from '../../components/Loader/Loader';
+import MainLayout from '../../../layouts/MainLayout/MainLayout';
+import Loader from '../../../components/Loader/Loader';
 import PostContent from './PostContent/PostContent';
 import CommentForm from './CommentForm/CommentForm';
 import CommentList from './CommentList/CommentList';
-import { PostStub, CommentsStub } from '../../stubs';
-import { Comment } from '../../core/models';
+import { PostStub, CommentsStub } from '../../../stubs';
+import { Comment } from '../../../core/models';
 
-export default function PostPage() {
+export default function ViewPostPage() {
     const isPostLoading = false;
     const isCommentsLoading = false;
-    const { id: postId } = useParams() as any;
+    const { id: postId } = (useParams() as unknown) as { id: number };
     console.log('postId', postId);
 
     const onCommentFormSubmit = (text: string) => {
