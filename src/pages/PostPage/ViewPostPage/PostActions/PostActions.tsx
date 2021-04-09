@@ -8,7 +8,6 @@ export default function PostActions({ id }: { id: number }) {
         console.log(`delete post ${id}`);
     };
     const editPost = () => {
-        console.log(`edit post ${id}`);
         history.push(`/update-post/${id}`);
     };
     return (

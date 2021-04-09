@@ -1,12 +1,17 @@
 import React from 'react';
 
 import MainLayout from '../../../layouts/MainLayout/MainLayout';
+import { Post } from '../../../core/models';
+import FormPage from '../PostForm/FormPage';
 
 export default function CreatePostPage() {
+    const onCreate = (data: Post) => {
+        console.log('on create', data);
+    };
     return (
         <MainLayout>
             <h1 className="my-4">Create Post</h1>
-            Form
+            <FormPage onSubmit={onCreate} />
         </MainLayout>
     );
 }
