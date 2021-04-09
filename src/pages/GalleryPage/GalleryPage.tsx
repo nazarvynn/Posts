@@ -28,7 +28,7 @@ export default function GalleryPage() {
                 {gallery.isLoading && <Loader />}
                 {gallery.photos.length > 0 && <GalleryList photos={gallery.photos} />}
                 <button
-                    className="btn btn-primary mx-auto mb-5"
+                    className="btn btn-primary mx-auto mb-4"
                     onClick={() => {
                         setIsLoading();
                         setPage(page + 1);

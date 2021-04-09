@@ -1,6 +1,6 @@
-import { Navigation } from '../models';
+import { NavigationItem } from '../models';
 
-export const NAVIGATION: Navigation[] = [
+export const NAVIGATION: NavigationItem[] = [
     {
         label: 'Home',
         path: '/posts',

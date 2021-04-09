@@ -2,23 +2,33 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import UserMenu from '../UserMenu/UserMenu';
-import { Navigation } from '../../../core/models';
-import { NAVIGATION } from '../../../core/const';
+import { useAuth } from '../../../auth/hooks';
+import { ADMIN_PAGES, NAVIGATION } from '../../../core/const';
+import { UserRole } from '../../../core/enum';
+import { NavigationItem, User } from '../../../core/models';
 
 export default function MainNavigation() {
-    const isAdminRole = true;
+    const { user: authUser } = useAuth();
+    const { userRole } = authUser as User;
+
     return (
         <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto">
-                {NAVIGATION.map(({ label, path }: Navigation, index) => (
+                {getNavigationList(userRole).map(({ label, path }: NavigationItem, index) => (
                     <li className="nav-item" key={index}>
                         <NavLink className="nav-link" to={path} exact activeClassName="active">
                             {label}
                         </NavLink>
                     </li>
                 ))}
-                {isAdminRole && <UserMenu />}
+                <UserMenu />
             </ul>
         </div>
     );
+}
+
+function getNavigationList(userRole: UserRole): NavigationItem[] {
+    return userRole === UserRole.Observer
+        ? NAVIGATION.filter(({ path }) => ADMIN_PAGES.indexOf(path) === -1)
+        : NAVIGATION;
 }

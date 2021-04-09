@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { useAuth } from '../../../auth/hooks';
-import { USER_MENU } from '../../../core/const';
-import { MenuType } from '../../../core/enum';
-import { MenuItem } from '../../../core/models';
+import { User } from '../../../core/models';
 import './userMenu.scss';
 
 export default function UserMenu() {
     const USER_MENU_CLS = 'user-menu';
     const history = useHistory();
-    const auth = useAuth();
-    const logout = () => {
-        auth.logout().then(() => {
+    const { user: authUser, logout: authLogout } = useAuth();
+    const { userName, email } = authUser as User;
+    const logoutUser = () => {
+        authLogout().then(() => {
             history.push('/auth');
         });
     };
@@ -36,33 +35,20 @@ export default function UserMenu() {
 
     return (
         <li className={`nav-item dropdown ${isShow ? 'show' : ''}`} onClick={toggleSow}>
-            <span className="nav-link dropdown-toggle">{auth.user.userName}</span>
+            <span className="nav-link dropdown-toggle">{userName}</span>
             <ul className={`dropdown-menu ${USER_MENU_CLS} ${isShow ? 'show' : ''}`}>
-                {USER_MENU.map((item, index) => (
-                    <li key={index}>{getMenuItem(item, logout)}</li>
-                ))}
+                <li>
+                    <span className="dropdown-item">{email}</span>
+                </li>
+                <li>
+                    <hr className="dropdown-divider" />
+                </li>
+                <li>
+                    <span className="dropdown-item" onClick={logoutUser}>
+                        logout
+                    </span>
+                </li>
             </ul>
         </li>
     );
 }
-
-const getMenuItem = ({ type, label, path }: MenuItem, logout: any) => {
-    switch (type) {
-        case MenuType.LABEL:
-            return <span className="dropdown-item">{label}</span>;
-        case MenuType.DIVIDER:
-            return <hr className="dropdown-divider" />;
-        case MenuType.LOGOUT:
-            return (
-                <span className="dropdown-item" onClick={logout}>
-                    {label}
-                </span>
-            );
-        case MenuType.LINK:
-            return (
-                <Link className="dropdown-item" to={path as string}>
-                    {label}
-                </Link>
-            );
-    }
-};

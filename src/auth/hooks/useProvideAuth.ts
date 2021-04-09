@@ -1,19 +1,17 @@
 import { useState } from 'react';
 
 import { AuthData, User } from '../../core/models';
-import { authLogin, authLogout } from '../../services';
+import { getAuthUser, authLogin, authLogout } from '../../services';
 
 export default function useProvideAuth() {
-    const [user, setUser] = useState(null);
-    const login = (authData: AuthData) => {
-        return authLogin(authData).then((user: User) => {
-            setUser(user as any);
+    const [user, setUser] = useState(getAuthUser() as User);
+    const login = (authData: AuthData) =>
+        authLogin(authData).then((user) => {
+            setUser(user);
         });
-    };
-    const logout = () => {
-        return authLogout().then(() => {
-            setUser(null);
+    const logout = () =>
+        authLogout().then(() => {
+            setUser(null as any);
         });
-    };
     return { user, login, logout };
 }
