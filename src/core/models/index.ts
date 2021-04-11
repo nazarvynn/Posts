@@ -3,6 +3,7 @@ export * from './Category';
 export * from './Comment';
 export * from './Gallery';
 export * from './NavigationItem';
+export * from './PaginationItem';
 export * from './Photo';
 export * from './Post';
 export * from './User';

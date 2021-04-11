@@ -15,10 +15,10 @@ export default function ViewPostPage() {
     const { id: postId } = (useParams() as unknown) as { id: number };
     console.log('postId', postId);
 
-    const onCommentFormSubmit = (text: string) => {
+    const onCommentFormSubmit = ({ name, body }: { name: string; body: string }) => {
         const comment: Comment = {
-            name: 'user',
-            body: text,
+            name,
+            body,
             post: {
                 id: postId,
             },
