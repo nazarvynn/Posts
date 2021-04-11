@@ -31,7 +31,7 @@ export default function ViewPostPage() {
             {isPostLoading && <Loader />}
             {!isPostLoading && (
                 <>
-                    <PostContent {...PostStub} />
+                    <PostContent {...PostStub} id={+postId} />
                     <hr />
                     <CommentForm onSubmit={onCommentFormSubmit} />
                     {isCommentsLoading && <Loader />}
