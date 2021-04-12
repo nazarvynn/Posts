@@ -1,6 +1,5 @@
 import React from 'react';
 
-import MainLayout from '../../layouts/MainLayout/MainLayout';
 import Loader from '../../components/Loader/Loader';
 import PostsList from './PostsList/PostsList';
 import Pagination from './Pagination/Pagination';
@@ -10,7 +9,7 @@ export default function PostsPage() {
     const isLoading = false;
 
     return (
-        <MainLayout>
+        <>
             <h1 className="my-4">Posts</h1>
             {isLoading && <Loader />}
             {!isLoading && (
@@ -19,6 +18,6 @@ export default function PostsPage() {
                     <Pagination />
                 </>
             )}
-        </MainLayout>
+        </>
     );
 }

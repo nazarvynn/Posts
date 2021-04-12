@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import MainLayout from '../../../layouts/MainLayout/MainLayout';
 import Loader from '../../../components/Loader/Loader';
 import PostContent from './PostContent/PostContent';
 import CommentForm from './CommentForm/CommentForm';
@@ -27,7 +26,7 @@ export default function ViewPostPage() {
     };
 
     return (
-        <MainLayout>
+        <>
             {isPostLoading && <Loader />}
             {!isPostLoading && (
                 <>
@@ -38,6 +37,6 @@ export default function ViewPostPage() {
                     {!isCommentsLoading && <CommentList comments={CommentsStub} />}
                 </>
             )}
-        </MainLayout>
+        </>
     );
 }

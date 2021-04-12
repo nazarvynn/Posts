@@ -4,12 +4,18 @@ import RelayEnvironment from '../relayEnvironment';
 import styled from 'styled-components';
 
 import AppRouter from './Router';
+import ErrorBoundary from './ErrorBoundary';
+import ProvideAuth from '../auth/ProvideAuth';
 
 function App() {
     return (
         <RelayEnvironmentProvider environment={RelayEnvironment}>
             <Wrapper className="App">
-                <AppRouter />
+                <ErrorBoundary>
+                    <ProvideAuth>
+                        <AppRouter />
+                    </ProvideAuth>
+                </ErrorBoundary>
             </Wrapper>
         </RelayEnvironmentProvider>
     );

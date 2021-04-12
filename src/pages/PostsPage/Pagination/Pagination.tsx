@@ -24,7 +24,7 @@ export default function Pagination() {
     ];
     return (
         <nav>
-            <ul className="pagination">
+            <ul className="pagination pagination-sm justify-content-center mb-4">
                 <li className={`page-item ${isPreviousDisabled ? 'disabled' : ''}`}>
                     <Link className="page-link" to="/posts">
                         Previous

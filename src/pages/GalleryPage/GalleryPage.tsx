@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import MainLayout from '../../layouts/MainLayout/MainLayout';
 import Loader from '../../components/Loader/Loader';
 import GalleryList from './GalleryList/GalleryList';
 import { getPhotosByPage } from '../../services';
@@ -18,11 +17,14 @@ export default function GalleryPage() {
 
     useEffect(() => {
         setIsLoading();
-        getPhotosByPage(page).subscribe({ next: setGalleryPage });
+        const subscription$ = getPhotosByPage(page).subscribe({ next: setGalleryPage });
+        return () => {
+            subscription$.unsubscribe();
+        };
     }, [page]);
 
     return (
-        <MainLayout>
+        <>
             <h1 className="my-4">Gallery</h1>
             <div className="row">
                 {gallery.isLoading && <Loader />}
@@ -37,6 +39,6 @@ export default function GalleryPage() {
                     Load more
                 </button>
             </div>
-        </MainLayout>
+        </>
     );
 }
