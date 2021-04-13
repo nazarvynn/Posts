@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../store/store';
@@ -12,7 +12,8 @@ import chunks from '../../utils/chunks';
 
 const PAGE_SIZE = 3;
 export default function PostsPage() {
-    const pagesCount = 3;
+    const pagesCount = 3; // Math.ceil(5000 / 3)
+    const history = useHistory();
     const { page } = (useParams() as unknown) as { page: number };
     const { posts, loading } = useSelector((state: RootState) => state.posts);
     const dispatch = useDispatch();
@@ -22,6 +23,12 @@ export default function PostsPage() {
         dispatch(getPostsByPage(page));
     }, [dispatch, page]);
 
+    const onPageChange = (page: number) => {
+        if (page >= 1 && page <= pagesCount) {
+            history.push(`/posts/${page}`);
+        }
+    };
+
     return (
         <>
             <h1 className="my-4">Posts</h1>
@@ -29,7 +36,7 @@ export default function PostsPage() {
             {!loading && posts?.length && (
                 <>
                     <PostsList posts={getPostInPage(posts, +page)} />
-                    <Pagination activePage={+page} pagesCount={pagesCount} />
+                    <Pagination activePage={+page} pagesCount={pagesCount} onPageChange={onPageChange} />
                 </>
             )}
         </>
