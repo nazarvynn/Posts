@@ -6,5 +6,6 @@ export * from './NavigationItem';
 export * from './PaginationItem';
 export * from './Photo';
 export * from './Post';
+export * from './PostsState';
 export * from './User';
 export * from './WebStorageOptions';

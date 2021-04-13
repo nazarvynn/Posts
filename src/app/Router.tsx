@@ -22,7 +22,7 @@ export default function AppRouter() {
                 <Route
                     path="/"
                     exact
-                    render={() => (auth?.user ? <Redirect to="/posts" /> : <Redirect to="/auth" />)}
+                    render={() => (auth?.user ? <Redirect to="/posts/1" /> : <Redirect to="/auth" />)}
                 />
                 <Route path="/auth" exact>
                     <LoginPage />
@@ -30,10 +30,10 @@ export default function AppRouter() {
                 {/* private routes */}
                 <MainLayout>
                     <Suspense fallback={<Loader />}>
-                        <PrivateRoute path="/posts" exact>
+                        <PrivateRoute path="/posts/:page" exact>
                             <PostsPage />
                         </PrivateRoute>
-                        <PrivateRoute path="/posts/:id">
+                        <PrivateRoute path="/post/:id">
                             <ViewPostPage />
                         </PrivateRoute>
                         <PrivateRoute path="/create-post" exact>

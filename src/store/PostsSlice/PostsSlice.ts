@@ -1,23 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const postsSlice = createSlice({
-    name: 'counter',
-    initialState: {
-        value: 0,
-    },
-    reducers: {
-        increment: (state) => {
-            state.value += 1;
-        },
-        decrement: (state) => {
-            state.value -= 1;
-        },
-        incrementByAmount: (state, action) => {
-            state.value += action.payload;
-        },
-    },
+import { PostsState } from '../../core/models';
+import { fetchPostsByPage } from '../../relay/services';
+
+const initialState: PostsState = {
+    posts: [],
+    loading: null,
+    error: null,
+};
+
+export const getPostsByPage = createAsyncThunk('users/fetchByIdStatus', (page: number) => {
+    return fetchPostsByPage(page);
 });
 
-export const { increment, decrement, incrementByAmount } = postsSlice.actions;
+export const postsSlice = createSlice({
+    name: 'posts',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(getPostsByPage.pending, (state: PostsState) => {
+            state.loading = true;
+        });
+        builder.addCase(getPostsByPage.fulfilled, (state: PostsState, action: any) => {
+            state.loading = false;
+            state.posts = [...state.posts, ...action.payload];
+        });
+        builder.addCase(getPostsByPage.rejected, (state: PostsState, action: any) => {
+            state.loading = false;
+            state.error = action.error;
+        });
+    },
+});
 
 export default postsSlice.reducer;
