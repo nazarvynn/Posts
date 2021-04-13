@@ -5,7 +5,7 @@ import { PaginationItem } from '../../../../core/models';
 
 export default function PaginationListItem({ page, onClick, isActive }: PaginationItem) {
     return (
-        <li className={`page-item ${isActive ? 'active' : ''}`}>
+        <li className={`page-item ${isActive ? 'active' : page === '...' ? 'disabled' : ''}`}>
             <span className="page-link" onClick={() => onClick(page)}>
                 {page}
             </span>
@@ -14,7 +14,7 @@ export default function PaginationListItem({ page, onClick, isActive }: Paginati
 }
 
 PaginationListItem.propTypes = {
-    page: PropTypes.number.isRequired,
+    page: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     isActive: PropTypes.bool,
 };

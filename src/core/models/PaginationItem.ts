@@ -1,5 +1,5 @@
 export interface PaginationItem {
-    page: number;
+    page: string;
     onClick: any;
     isActive?: boolean;
 }

@@ -15,6 +15,7 @@ export default function Pagination({
 }) {
     const isPreviousDisabled = activePage === 1;
     const isNextDisabled = activePage === pagesCount;
+    const pages = generatePages(pagesCount, activePage);
     return (
         <nav>
             <ul className="pagination pagination-sm justify-content-center mb-4">
@@ -28,12 +29,12 @@ export default function Pagination({
                         Previous
                     </span>
                 </li>
-                {[...Array(pagesCount)].map((_, index) => (
+                {pages.map((page, index) => (
                     <PaginationListItem
                         key={index}
-                        page={index + 1}
+                        page={page}
                         onClick={(page) => onPageChange(page)}
-                        isActive={activePage === index + 1}
+                        isActive={`${activePage}` === `${page}`}
                     />
                 ))}
                 <li className={`page-item ${isNextDisabled ? 'disabled' : ''}`}>
@@ -50,9 +51,39 @@ export default function Pagination({
         </nav>
     );
 }
-
 Pagination.propTypes = {
     activePage: PropTypes.number.isRequired,
     pagesCount: PropTypes.number.isRequired,
     onPageChange: PropTypes.func.isRequired,
 };
+
+function generatePages(count: number, active: number): string[] {
+    if (count <= 6) {
+        return [...Array(count)].map((_, index) => `${index + 1}`);
+    } else {
+        const pages = ['1'];
+        if (active > 3) {
+            pages.push('...');
+        }
+        if (active === count) {
+            pages.push(`${active - 2}`);
+        }
+        if (active > 2) {
+            pages.push(`${active - 1}`);
+        }
+        if (active !== 1 && active !== count) {
+            pages.push(`${active}`);
+        }
+        if (active < count - 1) {
+            pages.push(`${active + 1}`);
+        }
+        if (active === 1) {
+            pages.push(`${active + 2}`);
+        }
+        if (active < count - 2) {
+            pages.push('...');
+        }
+        pages.push(`${count}`);
+        return pages;
+    }
+}

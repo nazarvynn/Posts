@@ -12,11 +12,11 @@ import chunks from '../../utils/chunks';
 
 const PAGE_SIZE = 3;
 export default function PostsPage() {
-    const pagesCount = 3; // Math.ceil(5000 / 3)
     const history = useHistory();
     const { page } = (useParams() as unknown) as { page: number };
-    const { posts, loading } = useSelector((state: RootState) => state.posts);
+    const { posts, count, loading } = useSelector((state: RootState) => state.posts);
     const dispatch = useDispatch();
+    const pagesCount = Math.ceil(count / PAGE_SIZE);
 
     useEffect(() => {
         window.scrollTo(0, 0);
