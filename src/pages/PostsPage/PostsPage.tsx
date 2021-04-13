@@ -20,7 +20,7 @@ export default function PostsPage() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        dispatch(getPostsByPage(page));
+        dispatch(getPostsByPage(+page));
     }, [dispatch, page]);
 
     const onPageChange = (page: number) => {
@@ -44,5 +44,15 @@ export default function PostsPage() {
 }
 
 function getPostInPage(posts: Post[], page: number): Post[] {
-    return [...chunks(posts, PAGE_SIZE)[page - 1]];
+    if (posts.length > PAGE_SIZE) {
+        const parts = chunks(posts, PAGE_SIZE);
+        const partsCount = parts?.length;
+        if (partsCount && partsCount - 1 === page - 1) {
+            return [...parts[page - 1]];
+        } else {
+            return [...parts[partsCount - 1]];
+        }
+    } else {
+        return posts;
+    }
 }

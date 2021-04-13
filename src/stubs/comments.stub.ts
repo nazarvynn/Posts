@@ -2,7 +2,7 @@ import { Comment } from '../core/models';
 
 export const CommentsStub: Comment[] = [
     {
-        id: 1,
+        id: '1',
         name: 'Commenter Name 1',
         body:
             'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.\n' +
@@ -10,7 +10,7 @@ export const CommentsStub: Comment[] = [
             'ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.',
     },
     {
-        id: 2,
+        id: '2',
         name: 'Commenter Name 2',
         body:
             'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.\n' +

@@ -35,10 +35,10 @@ export default function PostItem({
 }
 
 PostItem.propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
-    user: PropTypes.string.isRequired,
+    user: PropTypes.string,
     image: PropTypes.string,
-    createdAt: PropTypes.number.isRequired,
+    createdAt: PropTypes.number,
 };

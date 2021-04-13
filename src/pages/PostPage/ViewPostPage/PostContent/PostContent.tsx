@@ -42,7 +42,7 @@ export default function PostContent({
 }
 
 PostContent.propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     user: PropTypes.string.isRequired,

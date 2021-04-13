@@ -11,7 +11,7 @@ import { Comment } from '../../../core/models';
 export default function ViewPostPage() {
     const isPostLoading = false;
     const isCommentsLoading = false;
-    const { id: postId } = (useParams() as unknown) as { id: number };
+    const { id: postId } = (useParams() as unknown) as { id: string };
     console.log('postId', postId);
 
     const onCommentFormSubmit = ({ name, body }: { name: string; body: string }) => {
@@ -19,7 +19,7 @@ export default function ViewPostPage() {
             name,
             body,
             post: {
-                id: postId,
+                id: `${postId}`,
             },
         };
         console.log('comment', comment);
@@ -30,7 +30,7 @@ export default function ViewPostPage() {
             {isPostLoading && <Loader />}
             {!isPostLoading && (
                 <>
-                    <PostContent {...PostStub} id={+postId} />
+                    <PostContent {...PostStub} id={postId} />
                     <hr />
                     <CommentForm onSubmit={onCommentFormSubmit} />
                     {isCommentsLoading && <Loader />}

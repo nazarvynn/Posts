@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Loader from '../../components/Loader/Loader';
 import GalleryList from './GalleryList/GalleryList';
-import { getPhotosByPage } from '../../relay/services';
+import { fetchPhotosByPage } from '../../relay/services';
 import { GalleryState } from '../../core/models';
 
 export default function GalleryPage() {
@@ -17,7 +17,7 @@ export default function GalleryPage() {
 
     useEffect(() => {
         setIsLoading();
-        const subscription$ = getPhotosByPage(page).subscribe({ next: setGalleryPage });
+        const subscription$ = fetchPhotosByPage(page).subscribe({ next: setGalleryPage });
         return () => {
             subscription$.unsubscribe();
         };

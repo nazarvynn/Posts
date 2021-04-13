@@ -1,4 +1,4 @@
-import { Photo } from '../core/models/Photo';
+import { Photo } from '../core/models';
 
 export const PhotosStub: Photo[] = [
     {

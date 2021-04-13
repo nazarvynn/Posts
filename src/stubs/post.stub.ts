@@ -1,7 +1,7 @@
 import { Post } from '../core/models';
 
 export const PostStub: Post = {
-    id: 1,
+    id: '1',
     title: 'Post Title 1',
     body: `<p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam

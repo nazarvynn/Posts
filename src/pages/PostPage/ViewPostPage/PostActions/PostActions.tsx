@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import ConfirmModal from '../../../../components/ConfirmModal/ConfirmModal';
 
-export default function PostActions({ id }: { id: number }) {
+export default function PostActions({ id }: { id: string }) {
     const [showModal, setShowModal] = useState(false);
     const history = useHistory();
     const onDeletePost = () => {
@@ -31,5 +31,5 @@ export default function PostActions({ id }: { id: number }) {
     );
 }
 PostActions.propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
 };

@@ -1,5 +1,10 @@
-import { PostsStub } from '../../stubs';
+import { Observable } from 'relay-runtime';
+import { fetchQuery } from 'react-relay/hooks';
 
-export async function fetchPostsByPage(page: number) {
-    return { data: PostsStub, count: PostsStub.length };
+import relayEnvironment from '../../relayEnvironment';
+import { PostsPageQuery } from '../queries';
+
+const PAGE_SIZE = 3;
+export function fetchPostsByPage(page: number): Observable<any> {
+    return fetchQuery(relayEnvironment, PostsPageQuery, { options: { paginate: { page, limit: PAGE_SIZE } } });
 }

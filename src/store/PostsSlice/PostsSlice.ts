@@ -10,8 +10,8 @@ const initialState: PostsState = {
     error: null,
 };
 
-export const getPostsByPage = createAsyncThunk('users/fetchByIdStatus', (page: number) => {
-    return fetchPostsByPage(page);
+export const getPostsByPage = createAsyncThunk('users/fetchByIdStatus', async (page: number) => {
+    return await fetchPostsByPage(page).toPromise();
 });
 
 export const postsSlice = createSlice({
@@ -22,10 +22,11 @@ export const postsSlice = createSlice({
         builder.addCase(getPostsByPage.pending, (state: PostsState) => {
             state.loading = true;
         });
-        builder.addCase(getPostsByPage.fulfilled, (state: PostsState, { payload }: any) => {
+        builder.addCase(getPostsByPage.fulfilled, (state: PostsState, action: any) => {
             state.loading = false;
-            state.posts = [...state.posts, ...payload.data];
-            state.count = Math.max(...[state.count, payload.count]);
+            const { posts } = action.payload;
+            state.posts = [...state.posts, ...posts.data];
+            state.count = Math.max(...[state.count, posts.meta.totalCount]);
         });
         builder.addCase(getPostsByPage.rejected, (state: PostsState, action: any) => {
             state.loading = false;
