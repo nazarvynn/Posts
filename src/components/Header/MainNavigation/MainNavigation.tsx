@@ -9,7 +9,7 @@ import { NavigationItem, User } from '../../../core/models';
 
 export default function MainNavigation() {
     const { user: authUser } = useAuth();
-    const { userRole } = authUser as User;
+    const { userRole } = (authUser as User) || {};
 
     return (
         <div className="collapse navbar-collapse">

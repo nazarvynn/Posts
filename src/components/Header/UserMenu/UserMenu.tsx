@@ -9,7 +9,7 @@ export default function UserMenu() {
     const USER_MENU_CLS = 'user-menu';
     const history = useHistory();
     const { user: authUser, logout: authLogout } = useAuth();
-    const { userName, email } = authUser as User;
+    const { userName, email } = (authUser as User) || {};
     const logoutUser = () => {
         authLogout().then(() => {
             history.push('/auth');

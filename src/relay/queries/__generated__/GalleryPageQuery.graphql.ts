@@ -39,7 +39,6 @@ export type GalleryPageQueryVariables = {
 export type GalleryPageQueryResponse = {
     readonly photos: {
         readonly data: ReadonlyArray<{
-            readonly id: string | null;
             readonly title: string | null;
             readonly url: string | null;
             readonly thumbnailUrl: string | null;
@@ -62,10 +61,10 @@ query GalleryPageQuery(
 ) {
   photos(options: $options) {
     data {
-      id
       title
       url
       thumbnailUrl
+      id
     }
     meta {
       totalCount
@@ -84,87 +83,84 @@ var v0 = [
 ],
 v1 = [
   {
-    "alias": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "options",
-        "variableName": "options"
-      }
-    ],
-    "concreteType": "PhotosPage",
-    "kind": "LinkedField",
-    "name": "photos",
-    "plural": false,
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "Photo",
-        "kind": "LinkedField",
-        "name": "data",
-        "plural": true,
-        "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "id",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "title",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "url",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "thumbnailUrl",
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "PageMetadata",
-        "kind": "LinkedField",
-        "name": "meta",
-        "plural": false,
-        "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "totalCount",
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      }
-    ],
-    "storageKey": null
+    "kind": "Variable",
+    "name": "options",
+    "variableName": "options"
   }
-];
+],
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "title",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "url",
+  "storageKey": null
+},
+v4 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "thumbnailUrl",
+  "storageKey": null
+},
+v5 = {
+  "alias": null,
+  "args": null,
+  "concreteType": "PageMetadata",
+  "kind": "LinkedField",
+  "name": "meta",
+  "plural": false,
+  "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "totalCount",
+      "storageKey": null
+    }
+  ],
+  "storageKey": null
+};
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "GalleryPageQuery",
-    "selections": (v1/*: any*/),
+    "selections": [
+      {
+        "alias": null,
+        "args": (v1/*: any*/),
+        "concreteType": "PhotosPage",
+        "kind": "LinkedField",
+        "name": "photos",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "Photo",
+            "kind": "LinkedField",
+            "name": "data",
+            "plural": true,
+            "selections": [
+              (v2/*: any*/),
+              (v3/*: any*/),
+              (v4/*: any*/)
+            ],
+            "storageKey": null
+          },
+          (v5/*: any*/)
+        ],
+        "storageKey": null
+      }
+    ],
     "type": "Query",
     "abstractKey": null
   },
@@ -173,17 +169,51 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "GalleryPageQuery",
-    "selections": (v1/*: any*/)
+    "selections": [
+      {
+        "alias": null,
+        "args": (v1/*: any*/),
+        "concreteType": "PhotosPage",
+        "kind": "LinkedField",
+        "name": "photos",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "Photo",
+            "kind": "LinkedField",
+            "name": "data",
+            "plural": true,
+            "selections": [
+              (v2/*: any*/),
+              (v3/*: any*/),
+              (v4/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "id",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
+          (v5/*: any*/)
+        ],
+        "storageKey": null
+      }
+    ]
   },
   "params": {
-    "cacheID": "edaba684f57a6cedb3515ea18ab1d935",
+    "cacheID": "31746881a2484c598953f7abbe143b26",
     "id": null,
     "metadata": {},
     "name": "GalleryPageQuery",
     "operationKind": "query",
-    "text": "query GalleryPageQuery(\n  $options: PageQueryOptions\n) {\n  photos(options: $options) {\n    data {\n      id\n      title\n      url\n      thumbnailUrl\n    }\n    meta {\n      totalCount\n    }\n  }\n}\n"
+    "text": "query GalleryPageQuery(\n  $options: PageQueryOptions\n) {\n  photos(options: $options) {\n    data {\n      title\n      url\n      thumbnailUrl\n      id\n    }\n    meta {\n      totalCount\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '0a53eca6bd980d1ddb6943b6364313d4';
+(node as any).hash = '5fa7719b5719bdf87fddacd1f7c110f0';
 export default node;

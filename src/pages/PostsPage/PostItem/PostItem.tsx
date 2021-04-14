@@ -13,7 +13,7 @@ export default function PostItem({
     image = 'http://placehold.it/750x300',
     createdAt = +new Date(),
 }: Post) {
-    const readMoreLink = `/posts/${id}`;
+    const readMoreLink = `/post/${id}`;
     const date = formatDate(createdAt);
 
     return (

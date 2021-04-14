@@ -9,8 +9,8 @@ export default function GalleryList({ photos }: { photos: Photo[] }) {
         <>
             {photos?.length ? (
                 <div className="row text-center text-lg-left">
-                    {photos.map((photo) => (
-                        <GalleryItem key={photo.id} {...photo} />
+                    {photos.map((photo, index) => (
+                        <GalleryItem key={index} {...photo} />
                     ))}
                 </div>
             ) : (
