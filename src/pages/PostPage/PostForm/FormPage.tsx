@@ -3,6 +3,8 @@ import * as PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
+import { Post } from '../../../core/models';
+
 const LoginFormSchema = Yup.object().shape({
     title: Yup.string().required('Required'),
     body: Yup.string().required('Required'),
@@ -10,13 +12,12 @@ const LoginFormSchema = Yup.object().shape({
     image: Yup.string(),
 });
 
-export default function FormPage({ onSubmit }: { onSubmit: any }) {
+export default function FormPage({ formData, onSubmit }: { formData?: Post; onSubmit: any }) {
+    const initialState = formData
+        ? { title: formData.title, body: formData.body, user: formData.user.name, image: '' }
+        : { title: '', user: '', image: '', body: '' };
     return (
-        <Formik
-            initialValues={{ title: '', user: '', image: '', body: '' }}
-            validationSchema={LoginFormSchema}
-            onSubmit={onSubmit}
-        >
+        <Formik initialValues={initialState} validationSchema={LoginFormSchema} onSubmit={onSubmit}>
             {({ errors, touched }) => {
                 const isInvalidTitle = errors.title && touched.title;
                 const isInvalidUser = errors.user && touched.user;
@@ -47,7 +48,7 @@ export default function FormPage({ onSubmit }: { onSubmit: any }) {
                             />
                             {isInvalidBody && <div className="invalid-feedback">{errors.body}</div>}
                         </div>
-                        <button type="submit" className="btn btn-primary btn-lg btn-block submit-button">
+                        <button type="submit" className="btn btn-primary btn-lg submit-button">
                             Submit
                         </button>
                     </Form>
@@ -57,5 +58,12 @@ export default function FormPage({ onSubmit }: { onSubmit: any }) {
     );
 }
 FormPage.propTypes = {
+    formData: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        body: PropTypes.string.isRequired,
+        user: PropTypes.shape({
+            name: PropTypes.string,
+        }),
+    }),
     onSubmit: PropTypes.func.isRequired,
 };

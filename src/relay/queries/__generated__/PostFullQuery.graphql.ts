@@ -3,10 +3,10 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
-export type PostQueryVariables = {
+export type PostFullQueryVariables = {
     id: string;
 };
-export type PostQueryResponse = {
+export type PostFullQueryResponse = {
     readonly post: {
         readonly id: string | null;
         readonly title: string | null;
@@ -15,17 +15,23 @@ export type PostQueryResponse = {
             readonly name: string | null;
             readonly email: string | null;
         } | null;
+        readonly comments: {
+            readonly data: ReadonlyArray<{
+                readonly email: string | null;
+                readonly body: string | null;
+            } | null> | null;
+        } | null;
     } | null;
 };
-export type PostQuery = {
-    readonly response: PostQueryResponse;
-    readonly variables: PostQueryVariables;
+export type PostFullQuery = {
+    readonly response: PostFullQueryResponse;
+    readonly variables: PostFullQueryVariables;
 };
 
 
 
 /*
-query PostQuery(
+query PostFullQuery(
   $id: ID!
 ) {
   post(id: $id) {
@@ -36,6 +42,13 @@ query PostQuery(
       name
       email
       id
+    }
+    comments {
+      data {
+        email
+        body
+        id
+      }
     }
   }
 }
@@ -96,7 +109,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "PostQuery",
+    "name": "PostFullQuery",
     "selections": [
       {
         "alias": null,
@@ -121,6 +134,30 @@ return {
               (v6/*: any*/)
             ],
             "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "CommentsPage",
+            "kind": "LinkedField",
+            "name": "comments",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "Comment",
+                "kind": "LinkedField",
+                "name": "data",
+                "plural": true,
+                "selections": [
+                  (v6/*: any*/),
+                  (v4/*: any*/)
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
           }
         ],
         "storageKey": null
@@ -133,7 +170,7 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "PostQuery",
+    "name": "PostFullQuery",
     "selections": [
       {
         "alias": null,
@@ -159,6 +196,31 @@ return {
               (v2/*: any*/)
             ],
             "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "CommentsPage",
+            "kind": "LinkedField",
+            "name": "comments",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "Comment",
+                "kind": "LinkedField",
+                "name": "data",
+                "plural": true,
+                "selections": [
+                  (v6/*: any*/),
+                  (v4/*: any*/),
+                  (v2/*: any*/)
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
           }
         ],
         "storageKey": null
@@ -166,14 +228,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "41b312614d2a64d4961ec4eb2dd94cfc",
+    "cacheID": "a59c509c224f2971ee08b3e5beb8f5d2",
     "id": null,
     "metadata": {},
-    "name": "PostQuery",
+    "name": "PostFullQuery",
     "operationKind": "query",
-    "text": "query PostQuery(\n  $id: ID!\n) {\n  post(id: $id) {\n    id\n    title\n    body\n    user {\n      name\n      email\n      id\n    }\n  }\n}\n"
+    "text": "query PostFullQuery(\n  $id: ID!\n) {\n  post(id: $id) {\n    id\n    title\n    body\n    user {\n      name\n      email\n      id\n    }\n    comments {\n      data {\n        email\n        body\n        id\n      }\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = 'f35fed4eb81e52039bb4a6555d77b686';
+(node as any).hash = '6d38987afcd6faca05df45fcb3e3d5d0';
 export default node;

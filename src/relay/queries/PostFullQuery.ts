@@ -1,7 +1,7 @@
 import { graphql } from 'babel-plugin-relay/macro';
 
 export default graphql`
-    query PostQuery($id: ID!) {
+    query PostFullQuery($id: ID!) {
         post(id: $id) {
             id
             title
@@ -9,6 +9,12 @@ export default graphql`
             user {
                 name
                 email
+            }
+            comments {
+                data {
+                    email
+                    body
+                }
             }
         }
     }

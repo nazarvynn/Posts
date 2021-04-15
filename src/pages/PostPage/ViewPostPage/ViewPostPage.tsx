@@ -2,16 +2,16 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useFetchData } from '../../../relay/hooks';
-import { PostQuery } from '../../../relay/queries';
+import { PostFullQuery } from '../../../relay/queries';
+import { Comment } from '../../../core/models';
 import Loader from '../../../components/Loader/Loader';
 import PostContent from './PostContent/PostContent';
 import CommentForm from './CommentForm/CommentForm';
 import CommentList from './CommentList/CommentList';
-import { Comment } from '../../../core/models';
 
 export default function ViewPostPage() {
     const { id: postId } = (useParams() as unknown) as { id: string };
-    const { data: post, loading }: { data: any; loading: boolean } = useFetchData(PostQuery, {
+    const { data: post, loading }: { data: any; loading: boolean } = useFetchData(PostFullQuery, {
         queryVariables: { id: postId },
     });
     const onCommentFormSubmit = ({ name, body }: { name: string; body: string }) => {

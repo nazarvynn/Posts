@@ -1,10 +1,10 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { Post, User } from '../../../../core/models';
 import formatDate from '../../../../utils/formatDate';
 import { useAuth } from '../../../../auth/hooks';
 import { UserRole } from '../../../../core/enum';
+import { Post, User } from '../../../../core/models';
 import PostActions from '../PostActions/PostActions';
 
 export default function PostContent({ id, title, body, user }: Post) {
