@@ -1,4 +1,5 @@
 import useFetchData from './useFetchData';
-import useRelayQuery from './useRelayQuery';
+import useInfiniteLoader from './useInfiniteLoader';
+import useMutationData from './useMutationData';
 
-export { useFetchData, useRelayQuery };
+export { useFetchData, useInfiniteLoader, useMutationData };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { PhotosQuery } from '../../relay/queries';
-import useInfiniteLoader from '../../relay/hooks/useInfiniteLoader';
+import { useInfiniteLoader } from '../../relay/hooks';
 import Loader from '../../components/Loader/Loader';
 import GalleryList from './GalleryList/GalleryList';
 

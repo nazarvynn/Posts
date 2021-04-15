@@ -8,19 +8,18 @@ import { Post } from '../../../core/models';
 const LoginFormSchema = Yup.object().shape({
     title: Yup.string().required('Required'),
     body: Yup.string().required('Required'),
-    user: Yup.string().required('Required'),
-    image: Yup.string(),
+    email: Yup.string().required('Required'),
 });
 
 export default function FormPage({ formData, onSubmit }: { formData?: Post; onSubmit: any }) {
     const initialState = formData
-        ? { title: formData.title, body: formData.body, user: formData.user.name, image: '' }
-        : { title: '', user: '', image: '', body: '' };
+        ? { title: formData.title, body: formData.body, email: formData.user.email }
+        : { title: '', email: '', body: '' };
     return (
         <Formik initialValues={initialState} validationSchema={LoginFormSchema} onSubmit={onSubmit}>
             {({ errors, touched }) => {
                 const isInvalidTitle = errors.title && touched.title;
-                const isInvalidUser = errors.user && touched.user;
+                const isInvalidEmail = errors.email && touched.email;
                 const isInvalidBody = errors.body && touched.body;
                 return (
                     <Form>
@@ -30,13 +29,9 @@ export default function FormPage({ formData, onSubmit }: { formData?: Post; onSu
                             {isInvalidTitle && <div className="invalid-feedback">{errors.title}</div>}
                         </div>
                         <div className="form-group">
-                            <label>Author</label>
-                            <Field name="user" className={`form-control ${isInvalidUser && 'is-invalid'}`} />
-                            {isInvalidUser && <div className="invalid-feedback">{errors.user}</div>}
-                        </div>
-                        <div className="form-group">
-                            <label>Image</label>
-                            <Field name="image" className="form-control" />
+                            <label>Email</label>
+                            <Field name="email" className={`form-control ${isInvalidEmail && 'is-invalid'}`} />
+                            {isInvalidEmail && <div className="invalid-feedback">{errors.email}</div>}
                         </div>
                         <div className="form-group">
                             <label>Content</label>
