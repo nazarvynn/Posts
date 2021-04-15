@@ -11,7 +11,7 @@ export default function LoginPage() {
     const auth = useAuth();
     const location = useLocation();
     const history = useHistory();
-    const { from } = (location.state as any) || { from: { pathname: '/posts/1' } };
+    const { from } = (location.state as any) || { from: { pathname: '/posts' } };
 
     const onLogin = (authData: AuthData) => {
         auth.login(authData)

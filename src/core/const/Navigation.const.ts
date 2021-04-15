@@ -3,7 +3,7 @@ import { NavigationItem } from '../models';
 export const NAVIGATION: NavigationItem[] = [
     {
         label: 'Home',
-        path: '/posts/1',
+        path: '/posts',
     },
     {
         label: 'Create Post',

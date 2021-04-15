@@ -4,7 +4,7 @@ import { mergeDeepLeft } from 'ramda';
 import { useQuery } from '@apollo/react-hooks';
 import { handleError } from '../utils';
 
-const useFetchData = (query: any, _variables = {}, onErrorUrl = '/home') => {
+const useFetchDataExample = (query: any, _variables = {}, onErrorUrl = '/home') => {
     const ITEMS_PER_PAGE = 25;
     const [variables, setVariables] = useState({
         ..._variables,
@@ -93,7 +93,7 @@ const useFetchData = (query: any, _variables = {}, onErrorUrl = '/home') => {
         setFilters,
     };
 };
-export default useFetchData;
+export default useFetchDataExample;
 */
 
 export default function useFetchDataExample() {}

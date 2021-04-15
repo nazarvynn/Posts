@@ -33,7 +33,7 @@ export default function Pagination({
                     <PaginationListItem
                         key={index}
                         page={page}
-                        onClick={(page) => onPageChange(page)}
+                        onClick={(page) => onPageChange(+page)}
                         isActive={`${activePage}` === `${page}`}
                     />
                 ))}

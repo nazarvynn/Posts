@@ -12,3 +12,9 @@ export default function useRelayQuery(query: any, options: any) {
 
     return queryReference;
 }
+
+/*
+// Usage example
+const options = useMemo(() => ({ paginate: { page, limit: 24 } }), [page]);
+const queryReference = useRelayQuery(GalleryPageQuery, options);
+*/

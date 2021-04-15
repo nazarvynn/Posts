@@ -33,10 +33,10 @@ export type OperatorOptions = {
 export type SearchOptions = {
     q?: string | null;
 };
-export type PostsPageQueryVariables = {
+export type PostsQueryVariables = {
     options?: PageQueryOptions | null;
 };
-export type PostsPageQueryResponse = {
+export type PostsQueryResponse = {
     readonly posts: {
         readonly data: ReadonlyArray<{
             readonly id: string | null;
@@ -48,15 +48,15 @@ export type PostsPageQueryResponse = {
         } | null;
     } | null;
 };
-export type PostsPageQuery = {
-    readonly response: PostsPageQueryResponse;
-    readonly variables: PostsPageQueryVariables;
+export type PostsQuery = {
+    readonly response: PostsQueryResponse;
+    readonly variables: PostsQueryVariables;
 };
 
 
 
 /*
-query PostsPageQuery(
+query PostsQuery(
   $options: PageQueryOptions
 ) {
   posts(options: $options) {
@@ -154,7 +154,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "PostsPageQuery",
+    "name": "PostsQuery",
     "selections": (v1/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -163,18 +163,18 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "PostsPageQuery",
+    "name": "PostsQuery",
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "51179d030273691f9e29afb53b257929",
+    "cacheID": "a3957469b375491ba7eb6659eea2d5d9",
     "id": null,
     "metadata": {},
-    "name": "PostsPageQuery",
+    "name": "PostsQuery",
     "operationKind": "query",
-    "text": "query PostsPageQuery(\n  $options: PageQueryOptions\n) {\n  posts(options: $options) {\n    data {\n      id\n      title\n      body\n    }\n    meta {\n      totalCount\n    }\n  }\n}\n"
+    "text": "query PostsQuery(\n  $options: PageQueryOptions\n) {\n  posts(options: $options) {\n    data {\n      id\n      title\n      body\n    }\n    meta {\n      totalCount\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '675dd0b0762750f644f4c9ecb1c0f70a';
+(node as any).hash = 'adda8e06144abb293997a9df83b631f0';
 export default node;

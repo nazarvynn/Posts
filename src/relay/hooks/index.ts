@@ -1,3 +1,4 @@
+import useFetchData from './useFetchData';
 import useRelayQuery from './useRelayQuery';
 
-export { useRelayQuery };
+export { useFetchData, useRelayQuery };
