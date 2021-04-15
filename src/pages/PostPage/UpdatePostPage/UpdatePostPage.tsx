@@ -11,7 +11,7 @@ export default function UpdatePostPage() {
     };
     return (
         <>
-            <h1 className="my-4">Update Post</h1>
+            <h1 className="my-4 page-tile">Update Post</h1>
             <FormPage onSubmit={onUpdate} />
         </>
     );

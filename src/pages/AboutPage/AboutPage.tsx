@@ -6,7 +6,7 @@ export default function AboutPage() {
     const isLoading = false;
     return (
         <>
-            <h1 className="my-4">About</h1>
+            <h1 className="my-4 page-tile">About</h1>
             {isLoading && <Loader />}
             {!isLoading && (
                 <>

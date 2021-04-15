@@ -12,7 +12,7 @@ export default function UsersPage() {
 
     return (
         <>
-            <h1 className="my-4">Users Page</h1>
+            <h1 className="my-4 page-tile">Users Page</h1>
             {isLoading && <Loader />}
             {!isLoading && <Table colums={columns} data={tableData} />}
         </>

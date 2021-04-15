@@ -11,7 +11,7 @@ export default function GalleryPage() {
     const { isLoading, data: photos } = useInfiniteLoader(PhotosQuery, page, PAGE_SIZE);
     return (
         <>
-            <h1 className="my-4">Gallery</h1>
+            <h1 className="my-4 page-tile">Gallery</h1>
             <div className="row">{photos.length > 0 && <GalleryList photos={photos} />}</div>
             {isLoading && <Loader />}
             <div className="row">

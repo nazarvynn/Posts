@@ -15,7 +15,7 @@ export default function PostContent({ id, title, body, user }: Post) {
 
     return (
         <>
-            <h1 className="mt-4">{title}</h1>
+            <h1 className="mt-4 page-tile">{title}</h1>
             <div className="row">
                 <div className="col-8">
                     <p className="lead">

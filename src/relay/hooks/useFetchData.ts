@@ -7,7 +7,7 @@ export default function useFetchData(
     query: any,
     {
         queryVariables = {},
-        pageSize = 10,
+        pageSize,
         onErrorUrl = '/posts',
     }: { queryVariables?: any; pageSize?: number; onErrorUrl?: string }
 ) {
@@ -22,7 +22,7 @@ export default function useFetchData(
     const setIsLoading = () => {
         setData(({ data, totalCount }) => ({ isLoading: true, data, totalCount }));
     };
-    const storeData = (response: any) => {
+    const storeData = (response: any = {}) => {
         const dataKeys = Object.keys(response || {});
         if (dataKeys?.length > 1) {
             throw new Error(
@@ -30,8 +30,8 @@ export default function useFetchData(
             );
         }
         const [dataKey] = dataKeys;
-        const data = response && response[dataKey];
-        const { totalCount } = response ? response[dataKey].meta || { totalCount: 0 } : { totalCount: 0 };
+        const data = response[dataKey]?.data || response[dataKey];
+        const { totalCount } = response ? response[dataKey]?.meta || { totalCount: 0 } : { totalCount: 0 };
         setData(() => ({ isLoading: false, data, totalCount }));
     };
     const refetch = useCallback((variables) => {
@@ -43,15 +43,18 @@ export default function useFetchData(
 
     useEffect(() => {
         setIsLoading();
+        const options = pageSize ? { options: { paginate: { page, limit: pageSize } } } : {};
         // const subscription$ = fetchQuery(relayEnvironment, query, {
         //     options: { paginate: { page, limit: pageSize } },
         // }).subscribe({ next: storeData });
 
-        const subscription$ = fetchQuery(relayEnvironment, query, variables).subscribe({ next: storeData });
+        const subscription$ = fetchQuery(relayEnvironment, query, { ...variables, ...options }).subscribe({
+            next: storeData,
+        });
         return () => {
             subscription$.unsubscribe();
         };
-    }, [query, variables]);
+    }, [query, variables, page, pageSize]);
 
     useEffect(() => {
         if (data) {

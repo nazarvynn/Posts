@@ -7,6 +7,9 @@ export default graphql`
                 id
                 title
                 body
+                user {
+                    name
+                }
             }
             meta {
                 totalCount

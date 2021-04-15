@@ -9,7 +9,7 @@ export default function CreatePostPage() {
     };
     return (
         <>
-            <h1 className="my-4">Create Post</h1>
+            <h1 className="my-4 page-tile">Create Post</h1>
             <FormPage onSubmit={onCreate} />
         </>
     );

@@ -14,18 +14,18 @@ export default function PostsPage() {
     });
     return (
         <>
-            <h1 className="my-4">Posts</h1>
+            <h1 className="my-4 page-tile">Posts</h1>
             {loading && <Loader />}
-            {/*{!loading && posts?.data?.length && (*/}
-            {/*    <>*/}
-            {/*        <PostsList posts={posts} />*/}
-            {/*        <Pagination*/}
-            {/*            activePage={activePage}*/}
-            {/*            pagesCount={Math.ceil(totalCount / PAGE_SIZE)}*/}
-            {/*            onPageChange={(page) => loadByPage(page)}*/}
-            {/*        />*/}
-            {/*    </>*/}
-            {/*)}*/}
+            {!loading && posts?.length && (
+                <>
+                    <PostsList posts={posts} />
+                    <Pagination
+                        activePage={activePage}
+                        pagesCount={Math.ceil(totalCount / PAGE_SIZE)}
+                        onPageChange={(page) => loadByPage(page)}
+                    />
+                </>
+            )}
         </>
     );
 }
