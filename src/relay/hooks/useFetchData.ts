@@ -44,11 +44,15 @@ export default function useFetchData(
     useEffect(() => {
         setIsLoading();
         const options = pageSize ? { options: { paginate: { page, limit: pageSize } } } : {};
-        // const subscription$ = fetchQuery(relayEnvironment, query, {
-        //     options: { paginate: { page, limit: pageSize } },
-        // }).subscribe({ next: storeData });
-
-        const subscription$ = fetchQuery(relayEnvironment, query, { ...variables, ...options }).subscribe({
+        const subscription$ = fetchQuery(
+            relayEnvironment,
+            query,
+            {
+                ...variables,
+                ...options,
+            },
+            { fetchPolicy: 'network-only' }
+        ).subscribe({
             next: storeData,
         });
         return () => {
@@ -66,8 +70,6 @@ export default function useFetchData(
             }
         }
     }, [data, isInitiallyLoaded]);
-
-    console.log('data', data);
 
     return {
         data: data.data,

@@ -11,21 +11,16 @@ import { Comment } from '../../../core/models';
 
 export default function ViewPostPage() {
     const { id: postId } = (useParams() as unknown) as { id: string };
-
     const { data: post, loading }: { data: any; loading: boolean } = useFetchData(PostQuery, {
         queryVariables: { id: postId },
     });
-    console.log(post);
 
     const onCommentFormSubmit = ({ name, body }: { name: string; body: string }) => {
         const comment: Comment = {
             name,
             body,
-            post: {
-                id: `${postId}`,
-            },
         };
-        console.log('comment', comment);
+        console.log('comment', postId, comment);
     };
 
     return (

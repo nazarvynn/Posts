@@ -8,12 +8,10 @@ export default graphql`
             body
             user {
                 name
-                username
                 email
             }
             comments {
                 data {
-                    name
                     email
                     body
                 }

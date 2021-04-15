@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as PropTypes from 'prop-types';
 
 import { Post, User } from '../../../../core/models';
@@ -18,9 +17,7 @@ export default function PostContent({ id, title, body, user }: Post) {
             <h1 className="mt-4 page-tile">{title}</h1>
             <div className="row">
                 <div className="col-8">
-                    <p className="lead">
-                        by &nbsp;<Link to="/posts">{user?.name}</Link>
-                    </p>
+                    <p className="lead">by {user?.name}</p>
                 </div>
                 <div className="col-4 text-right">{role === UserRole.Admin && <PostActions id={id} />}</div>
             </div>

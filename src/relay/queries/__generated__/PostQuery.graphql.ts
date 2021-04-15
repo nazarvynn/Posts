@@ -13,12 +13,10 @@ export type PostQueryResponse = {
         readonly body: string | null;
         readonly user: {
             readonly name: string | null;
-            readonly username: string | null;
             readonly email: string | null;
         } | null;
         readonly comments: {
             readonly data: ReadonlyArray<{
-                readonly name: string | null;
                 readonly email: string | null;
                 readonly body: string | null;
             } | null> | null;
@@ -42,13 +40,11 @@ query PostQuery(
     body
     user {
       name
-      username
       email
       id
     }
     comments {
       data {
-        name
         email
         body
         id
@@ -105,13 +101,6 @@ v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "username",
-  "storageKey": null
-},
-v7 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
   "name": "email",
   "storageKey": null
 };
@@ -142,8 +131,7 @@ return {
             "plural": false,
             "selections": [
               (v5/*: any*/),
-              (v6/*: any*/),
-              (v7/*: any*/)
+              (v6/*: any*/)
             ],
             "storageKey": null
           },
@@ -163,8 +151,7 @@ return {
                 "name": "data",
                 "plural": true,
                 "selections": [
-                  (v5/*: any*/),
-                  (v7/*: any*/),
+                  (v6/*: any*/),
                   (v4/*: any*/)
                 ],
                 "storageKey": null
@@ -206,7 +193,6 @@ return {
             "selections": [
               (v5/*: any*/),
               (v6/*: any*/),
-              (v7/*: any*/),
               (v2/*: any*/)
             ],
             "storageKey": null
@@ -227,8 +213,7 @@ return {
                 "name": "data",
                 "plural": true,
                 "selections": [
-                  (v5/*: any*/),
-                  (v7/*: any*/),
+                  (v6/*: any*/),
                   (v4/*: any*/),
                   (v2/*: any*/)
                 ],
@@ -243,14 +228,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "11aa5e35883083120609ca6cfceb37c5",
+    "cacheID": "8db7a839560c4435fee98901677a8d26",
     "id": null,
     "metadata": {},
     "name": "PostQuery",
     "operationKind": "query",
-    "text": "query PostQuery(\n  $id: ID!\n) {\n  post(id: $id) {\n    id\n    title\n    body\n    user {\n      name\n      username\n      email\n      id\n    }\n    comments {\n      data {\n        name\n        email\n        body\n        id\n      }\n    }\n  }\n}\n"
+    "text": "query PostQuery(\n  $id: ID!\n) {\n  post(id: $id) {\n    id\n    title\n    body\n    user {\n      name\n      email\n      id\n    }\n    comments {\n      data {\n        email\n        body\n        id\n      }\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '6d75f69f7f56779aa152f24ec24508a0';
+(node as any).hash = 'da617199a73ab831c0c67165c3bbae95';
 export default node;
