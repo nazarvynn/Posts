@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { AuthData, User } from '../../core/models';
-import { getAuthUser, authLogin, authLogout } from '../../services';
+import { getAuthUser, authLogin, authLogout } from '../Auth';
 
 export default function useProvideAuth() {
     const [user, setUser] = useState(getAuthUser() as User);

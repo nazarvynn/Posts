@@ -1,6 +1,6 @@
 import { AuthData, User } from '../core/models';
 import { USERS } from '../core/const';
-import { getItemByKey, setItemByKey, removeItemByKey } from './WebStorageService';
+import { getItemByKey, setItemByKey, removeItemByKey } from '../utils';
 
 const AUTH_USER_KEY = 'auth-user';
 
