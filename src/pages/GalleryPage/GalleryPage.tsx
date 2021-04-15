@@ -1,38 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
+import { PhotosQuery } from '../../relay/queries';
+import useInfiniteLoader from '../../relay/hooks/useInfiniteLoader';
 import Loader from '../../components/Loader/Loader';
 import GalleryList from './GalleryList/GalleryList';
-import { fetchPhotosByPage } from '../../relay/services';
-import { GalleryState } from '../../core/models';
 
 export default function GalleryPage() {
+    const PAGE_SIZE = 24;
     const [page, setPage] = useState(1);
-    const [gallery, setGallery] = useState({ isLoading: false, photos: [] } as GalleryState);
-    const setIsLoading = () => {
-        setGallery(({ photos: oldPhotos }) => ({ isLoading: true, photos: [...oldPhotos] }));
-    };
-    const setGalleryPage = ({ photos: { data } }: any) => {
-        setGallery(({ photos: oldPhotos }) => ({ isLoading: false, photos: [...oldPhotos.concat(data)] }));
-    };
-
-    useEffect(() => {
-        setIsLoading();
-        const subscription$ = fetchPhotosByPage(page).subscribe({ next: setGalleryPage });
-        return () => {
-            subscription$.unsubscribe();
-        };
-    }, [page]);
-
+    const { isLoading, data: photos } = useInfiniteLoader(PhotosQuery, page, PAGE_SIZE);
     return (
         <>
             <h1 className="my-4">Gallery</h1>
+            <div className="row">{photos.length > 0 && <GalleryList photos={photos} />}</div>
+            {isLoading && <Loader />}
             <div className="row">
-                {gallery.isLoading && <Loader />}
-                {gallery.photos.length > 0 && <GalleryList photos={gallery.photos} />}
                 <button
-                    className="btn btn-primary mx-auto mb-4"
+                    className="btn btn-primary mx-auto mt-2 mb-4"
                     onClick={() => {
-                        setIsLoading();
                         setPage(page + 1);
                     }}
                 >

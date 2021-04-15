@@ -3,5 +3,5 @@ import React from 'react';
 import './loader.scss';
 
 export default function Loader() {
-    return <div className="loader">Loading...</div>;
+    return <div className="loader text-center">Loading...</div>;
 }

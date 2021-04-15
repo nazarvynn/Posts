@@ -1,4 +1,4 @@
-import GalleryPageQuery from './GalleryPageQuery';
+import PhotosQuery from './PhotosQuery';
 import PostsPageQuery from './PostsPageQuery';
 
-export { GalleryPageQuery, PostsPageQuery };
+export { PhotosQuery, PostsPageQuery };

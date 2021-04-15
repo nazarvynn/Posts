@@ -33,30 +33,27 @@ export type OperatorOptions = {
 export type SearchOptions = {
     q?: string | null;
 };
-export type GalleryPageQueryVariables = {
+export type PhotosQueryVariables = {
     options?: PageQueryOptions | null;
 };
-export type GalleryPageQueryResponse = {
+export type PhotosQueryResponse = {
     readonly photos: {
         readonly data: ReadonlyArray<{
             readonly title: string | null;
             readonly url: string | null;
             readonly thumbnailUrl: string | null;
         } | null> | null;
-        readonly meta: {
-            readonly totalCount: number | null;
-        } | null;
     } | null;
 };
-export type GalleryPageQuery = {
-    readonly response: GalleryPageQueryResponse;
-    readonly variables: GalleryPageQueryVariables;
+export type PhotosQuery = {
+    readonly response: PhotosQueryResponse;
+    readonly variables: PhotosQueryVariables;
 };
 
 
 
 /*
-query GalleryPageQuery(
+query PhotosQuery(
   $options: PageQueryOptions
 ) {
   photos(options: $options) {
@@ -65,9 +62,6 @@ query GalleryPageQuery(
       url
       thumbnailUrl
       id
-    }
-    meta {
-      totalCount
     }
   }
 }
@@ -108,31 +102,13 @@ v4 = {
   "kind": "ScalarField",
   "name": "thumbnailUrl",
   "storageKey": null
-},
-v5 = {
-  "alias": null,
-  "args": null,
-  "concreteType": "PageMetadata",
-  "kind": "LinkedField",
-  "name": "meta",
-  "plural": false,
-  "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "totalCount",
-      "storageKey": null
-    }
-  ],
-  "storageKey": null
 };
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "GalleryPageQuery",
+    "name": "PhotosQuery",
     "selections": [
       {
         "alias": null,
@@ -155,8 +131,7 @@ return {
               (v4/*: any*/)
             ],
             "storageKey": null
-          },
-          (v5/*: any*/)
+          }
         ],
         "storageKey": null
       }
@@ -168,7 +143,7 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "GalleryPageQuery",
+    "name": "PhotosQuery",
     "selections": [
       {
         "alias": null,
@@ -198,22 +173,21 @@ return {
               }
             ],
             "storageKey": null
-          },
-          (v5/*: any*/)
+          }
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "31746881a2484c598953f7abbe143b26",
+    "cacheID": "0cec9a9726915ab7d2106b97ffd1d5d5",
     "id": null,
     "metadata": {},
-    "name": "GalleryPageQuery",
+    "name": "PhotosQuery",
     "operationKind": "query",
-    "text": "query GalleryPageQuery(\n  $options: PageQueryOptions\n) {\n  photos(options: $options) {\n    data {\n      title\n      url\n      thumbnailUrl\n      id\n    }\n    meta {\n      totalCount\n    }\n  }\n}\n"
+    "text": "query PhotosQuery(\n  $options: PageQueryOptions\n) {\n  photos(options: $options) {\n    data {\n      title\n      url\n      thumbnailUrl\n      id\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '5fa7719b5719bdf87fddacd1f7c110f0';
+(node as any).hash = '31af404a0c54105a498f686e96de86bb';
 export default node;
