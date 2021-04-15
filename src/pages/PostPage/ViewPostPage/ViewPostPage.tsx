@@ -14,7 +14,6 @@ export default function ViewPostPage() {
     const { data: post, loading }: { data: any; loading: boolean } = useFetchData(PostQuery, {
         queryVariables: { id: postId },
     });
-
     const onCommentFormSubmit = ({ name, body }: { name: string; body: string }) => {
         const comment: Comment = {
             name,

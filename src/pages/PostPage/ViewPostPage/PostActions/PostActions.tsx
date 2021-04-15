@@ -12,7 +12,7 @@ export default function PostActions({ id }: { id: string }) {
         console.log('delete confirmed', id);
     };
     const onEditPost = () => {
-        history.push(`/update-post/${id}`);
+        history.push(`/edit-post/${id}`);
     };
     return (
         <>

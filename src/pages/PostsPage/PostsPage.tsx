@@ -12,6 +12,7 @@ export default function PostsPage() {
     const { data: posts, loading, totalCount, activePage, loadByPage } = useFetchData(PostsQuery, {
         pageSize: PAGE_SIZE,
     });
+
     return (
         <>
             <h1 className="my-4 page-tile">Posts</h1>

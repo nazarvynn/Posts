@@ -1,1 +1,1 @@
-export const ADMIN_PAGES: string[] = ['/create-post', '/users'];
+export const ADMIN_PAGES: string[] = ['/add-post', '/users'];

@@ -36,10 +36,10 @@ export default function AppRouter() {
                         <PrivateRoute path="/posts/:id">
                             <ViewPostPage />
                         </PrivateRoute>
-                        <PrivateRoute path="/create-post" exact>
+                        <PrivateRoute path="/add-post" exact>
                             <CreatePostPage />
                         </PrivateRoute>
-                        <PrivateRoute path="/update-post/:id">
+                        <PrivateRoute path="/edit-post/:id">
                             <UpdatePostPage />
                         </PrivateRoute>
                         <PrivateRoute path="/gallery" exact>
