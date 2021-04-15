@@ -1,7 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { Post, User } from '../../../../core/models';
+import { Post } from '../../../../core/models';
 import formatDate from '../../../../utils/formatDate';
 import { useAuth } from '../../../../auth/hooks';
 import { UserRole } from '../../../../core/enum';
@@ -9,7 +9,7 @@ import PostActions from '../PostActions/PostActions';
 
 export default function PostContent({ id, title, body, user }: Post) {
     const { user: authUser } = useAuth();
-    const { role } = authUser as User;
+    const { userRole } = authUser;
     const date = formatDate(+new Date());
 
     return (
@@ -19,7 +19,7 @@ export default function PostContent({ id, title, body, user }: Post) {
                 <div className="col-8">
                     <p className="lead">by {user?.name}</p>
                 </div>
-                <div className="col-4 text-right">{role === UserRole.Admin && <PostActions id={id} />}</div>
+                <div className="col-4 text-right">{userRole === UserRole.Admin && <PostActions id={id} />}</div>
             </div>
             <hr />
             <p>Posted on {date}</p>
