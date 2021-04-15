@@ -1,18 +1,21 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
+import { useFetchData } from '../../../relay/hooks';
+import { PostQuery } from '../../../relay/queries';
 import Loader from '../../../components/Loader/Loader';
 import PostContent from './PostContent/PostContent';
 import CommentForm from './CommentForm/CommentForm';
 import CommentList from './CommentList/CommentList';
-import { PostStub, CommentsStub } from '../../../stubs';
 import { Comment } from '../../../core/models';
 
 export default function ViewPostPage() {
-    const isPostLoading = false;
-    const isCommentsLoading = false;
     const { id: postId } = (useParams() as unknown) as { id: string };
-    console.log('postId', postId);
+
+    const { data: post, loading }: { data: any; loading: boolean } = useFetchData(PostQuery, {
+        queryVariables: { id: postId },
+    });
+    console.log(post);
 
     const onCommentFormSubmit = ({ name, body }: { name: string; body: string }) => {
         const comment: Comment = {
@@ -27,14 +30,13 @@ export default function ViewPostPage() {
 
     return (
         <>
-            {isPostLoading && <Loader />}
-            {!isPostLoading && (
+            {loading && <Loader />}
+            {!loading && post && (
                 <>
-                    <PostContent {...PostStub} id={postId} />
+                    <PostContent {...post} id={postId} />
                     <hr />
                     <CommentForm onSubmit={onCommentFormSubmit} />
-                    {isCommentsLoading && <Loader />}
-                    {!isCommentsLoading && <CommentList comments={CommentsStub} />}
+                    <CommentList comments={post?.comments?.data} />
                 </>
             )}
         </>

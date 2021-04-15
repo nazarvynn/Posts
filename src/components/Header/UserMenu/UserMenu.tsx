@@ -9,7 +9,7 @@ export default function UserMenu() {
     const USER_MENU_CLS = 'user-menu';
     const history = useHistory();
     const { user: authUser, logout: authLogout } = useAuth();
-    const { userName, email } = (authUser as User) || {};
+    const { name, email } = (authUser as User) || {};
     const logoutUser = () => {
         authLogout().then(() => {
             history.push('/auth');
@@ -35,7 +35,7 @@ export default function UserMenu() {
 
     return (
         <li className={`nav-item dropdown ${isShow ? 'show' : ''}`} onClick={toggleSow}>
-            <span className="nav-link dropdown-toggle">{userName}</span>
+            <span className="nav-link dropdown-toggle">{name}</span>
             <ul className={`dropdown-menu ${USER_MENU_CLS} ${isShow ? 'show' : ''}`}>
                 <li>
                     <span className="dropdown-item">{email}</span>

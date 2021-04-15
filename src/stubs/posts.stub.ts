@@ -8,7 +8,10 @@ export const PostsStub: Post[] = [
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos\n' +
             'cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus\n' +
             'possimus, veniam magni quis!',
-        user: 'Start Bootstrap',
+        user: {
+            name: 'Start Bootstrap',
+            email: 'test@test.com',
+        },
         image: 'http://placehold.it/750x300',
         createdAt: 1617737255523,
     },
@@ -19,7 +22,10 @@ export const PostsStub: Post[] = [
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos\n' +
             'cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus\n' +
             'possimus, veniam magni quis!',
-        user: 'Start Bootstrap',
+        user: {
+            name: 'Start Bootstrap',
+            email: 'test@test.com',
+        },
         image: 'http://placehold.it/750x300',
         createdAt: 1617737265523,
     },
@@ -30,7 +36,10 @@ export const PostsStub: Post[] = [
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos\n' +
             'cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus\n' +
             'possimus, veniam magni quis!',
-        user: 'Start Bootstrap',
+        user: {
+            name: 'Start Bootstrap',
+            email: 'test@test.com',
+        },
         image: 'http://placehold.it/750x300',
         createdAt: 1617737275523,
     },
@@ -41,7 +50,10 @@ export const PostsStub: Post[] = [
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos\n' +
             'cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus\n' +
             'possimus, veniam magni quis!',
-        user: 'Start Bootstrap',
+        user: {
+            name: 'Start Bootstrap',
+            email: 'test@test.com',
+        },
         image: 'http://placehold.it/750x300',
         createdAt: 1617738255523,
     },
@@ -52,7 +64,10 @@ export const PostsStub: Post[] = [
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos\n' +
             'cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus\n' +
             'possimus, veniam magni quis!',
-        user: 'Start Bootstrap',
+        user: {
+            name: 'Start Bootstrap',
+            email: 'test@test.com',
+        },
         image: 'http://placehold.it/750x300',
         createdAt: 1617732265523,
     },
@@ -63,7 +78,10 @@ export const PostsStub: Post[] = [
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos\n' +
             'cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus\n' +
             'possimus, veniam magni quis!',
-        user: 'Start Bootstrap',
+        user: {
+            name: 'Start Bootstrap',
+            email: 'test@test.com',
+        },
         image: 'http://placehold.it/750x300',
         createdAt: 1617737275523,
     },
@@ -74,7 +92,10 @@ export const PostsStub: Post[] = [
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos\n' +
             'cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus\n' +
             'possimus, veniam magni quis!',
-        user: 'Start Bootstrap',
+        user: {
+            name: 'Start Bootstrap',
+            email: 'test@test.com',
+        },
         image: 'http://placehold.it/750x300',
         createdAt: 1617734255523,
     },
@@ -85,7 +106,10 @@ export const PostsStub: Post[] = [
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos\n' +
             'cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus\n' +
             'possimus, veniam magni quis!',
-        user: 'Start Bootstrap',
+        user: {
+            name: 'Start Bootstrap',
+            email: 'test@test.com',
+        },
         image: 'http://placehold.it/750x300',
         createdAt: 1617739265523,
     },
@@ -96,7 +120,10 @@ export const PostsStub: Post[] = [
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos\n' +
             'cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus\n' +
             'possimus, veniam magni quis!',
-        user: 'Start Bootstrap',
+        user: {
+            name: 'Start Bootstrap',
+            email: 'test@test.com',
+        },
         image: 'http://placehold.it/750x300',
         createdAt: 1617731275523,
     },

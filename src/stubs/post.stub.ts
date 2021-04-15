@@ -28,7 +28,10 @@ export const PostStub: Post = {
                 aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam
                 recusandae? Qui, necessitatibus, est!
             </p>`,
-    user: 'Start Bootstrap',
+    user: {
+        name: 'Start Bootstrap',
+        email: 'test@test.com',
+    },
     image: 'http://placehold.it/750x300',
     createdAt: 1617737255523,
 };

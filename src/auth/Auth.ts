@@ -9,7 +9,7 @@ export function getAuthUser(): User {
 }
 
 export function authLogin(authData: AuthData): Promise<User> {
-    const user = USERS.find(({ userName }) => userName === authData.userName);
+    const user = USERS.find(({ name }) => name === authData.name);
     return new Promise((resolve, reject) => {
         if (authData?.password === user?.password) {
             const { password, ...copyUser } = user;

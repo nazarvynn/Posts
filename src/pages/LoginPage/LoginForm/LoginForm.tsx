@@ -7,22 +7,22 @@ const LoginFormSchema = Yup.object().shape({
     // Example:
     // firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
     // email: Yup.string().email('Invalid email').required('Required'),
-    userName: Yup.string().required('Required'),
+    name: Yup.string().required('Required'),
     password: Yup.string().required('Required'),
 });
 
 export default function LoginForm({ onLogin }: { onLogin: any }) {
     return (
-        <Formik initialValues={{ userName: '', password: '' }} validationSchema={LoginFormSchema} onSubmit={onLogin}>
+        <Formik initialValues={{ name: '', password: '' }} validationSchema={LoginFormSchema} onSubmit={onLogin}>
             {({ errors, touched }) => {
-                const isInvalidUserName = errors.userName && touched.userName;
+                const isInvalidUserName = errors.name && touched.name;
                 const isInvalidPassword = errors.password && touched.password;
                 return (
                     <Form>
                         <div className="form-group">
                             <label>User name</label>
-                            <Field name="userName" className={`form-control ${isInvalidUserName && 'is-invalid'}`} />
-                            {isInvalidUserName && <div className="invalid-feedback">{errors.userName}</div>}
+                            <Field name="name" className={`form-control ${isInvalidUserName && 'is-invalid'}`} />
+                            {isInvalidUserName && <div className="invalid-feedback">{errors.name}</div>}
                         </div>
                         <div className="form-group">
                             <label>Password</label>

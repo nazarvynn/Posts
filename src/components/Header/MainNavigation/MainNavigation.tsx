@@ -9,12 +9,12 @@ import { NavigationItem, User } from '../../../core/models';
 
 export default function MainNavigation() {
     const { user: authUser } = useAuth();
-    const { userRole } = (authUser as User) || {};
+    const { role } = (authUser as User) || {};
 
     return (
         <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto">
-                {getNavigationList(userRole).map(({ label, path }: NavigationItem, index) => (
+                {getNavigationList(role).map(({ label, path }: NavigationItem, index) => (
                     <li className="nav-item" key={index}>
                         <NavLink className="nav-link" to={path} exact activeClassName="active">
                             {label}

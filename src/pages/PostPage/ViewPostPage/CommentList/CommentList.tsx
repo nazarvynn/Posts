@@ -8,7 +8,7 @@ export default function CommentList({ comments }: { comments: Comment[] }) {
     return (
         <>
             {comments?.length ? (
-                comments.map((comment) => <CommentItem key={comment.id} {...comment} />)
+                comments.map((comment, index) => <CommentItem key={index} {...comment} />)
             ) : (
                 <div>No comments</div>
             )}

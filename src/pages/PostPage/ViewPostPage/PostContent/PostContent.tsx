@@ -8,17 +8,10 @@ import { useAuth } from '../../../../auth/hooks';
 import { UserRole } from '../../../../core/enum';
 import PostActions from '../PostActions/PostActions';
 
-export default function PostContent({
-    id,
-    title,
-    body,
-    user,
-    image = 'http://placehold.it/750x300',
-    createdAt = +new Date(),
-}: Post) {
+export default function PostContent({ id, title, body, user }: Post) {
     const { user: authUser } = useAuth();
-    const { userRole } = authUser as User;
-    const date = formatDate(createdAt);
+    const { role } = authUser as User;
+    const date = formatDate(+new Date());
 
     return (
         <>
@@ -26,15 +19,15 @@ export default function PostContent({
             <div className="row">
                 <div className="col-8">
                     <p className="lead">
-                        by &nbsp;<Link to="/posts">{user}</Link>
+                        by &nbsp;<Link to="/posts">{user?.name}</Link>
                     </p>
                 </div>
-                <div className="col-4 text-right">{userRole === UserRole.Admin && <PostActions id={id} />}</div>
+                <div className="col-4 text-right">{role === UserRole.Admin && <PostActions id={id} />}</div>
             </div>
             <hr />
             <p>Posted on {date}</p>
             <hr />
-            <img className="img-fluid rounded" src={image} alt="placehold.it-900x300" />
+            <img className="img-fluid rounded" src="http://placehold.it/750x300" alt="placehold.it-900x300" />
             <hr />
             <article dangerouslySetInnerHTML={{ __html: body }} />
         </>
@@ -45,7 +38,7 @@ PostContent.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
-    user: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    createdAt: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+        name: PropTypes.string,
+    }),
 };
