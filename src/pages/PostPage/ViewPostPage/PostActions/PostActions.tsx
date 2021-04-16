@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import * as PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 
 import ConfirmModal from '../../../../components/ConfirmModal/ConfirmModal';
 
-export default function PostActions({ id }: { id: string }) {
+export default function PostActions({ onEditPost, onDeletePost }: { onEditPost: any; onDeletePost: any }) {
     const [showModal, setShowModal] = useState(false);
-    const history = useHistory();
-
-    const onDeletePost = () => {
+    const onDelete = () => {
         setShowModal(false);
-        console.log('delete confirmed', id);
-    };
-    const onEditPost = () => {
-        history.push(`/edit-post/${id}`);
+        onDeletePost();
     };
     return (
         <>
@@ -24,13 +18,14 @@ export default function PostActions({ id }: { id: string }) {
                 Edit
             </button>
             {showModal && (
-                <ConfirmModal onOk={onDeletePost} onCancel={() => setShowModal(false)}>
-                    Are you sure to delete the post ID {id}?
+                <ConfirmModal onOk={onDelete} onCancel={() => setShowModal(false)}>
+                    Are you sure to delete the post?
                 </ConfirmModal>
             )}
         </>
     );
 }
 PostActions.propTypes = {
-    id: PropTypes.string.isRequired,
+    onEditPost: PropTypes.func.isRequired,
+    onDeletePost: PropTypes.func.isRequired,
 };

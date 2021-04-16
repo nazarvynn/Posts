@@ -7,7 +7,12 @@ import { Post, User } from '../../../../core/models';
 import formatDate from '../../../../utils/formatDate';
 import PostActions from '../PostActions/PostActions';
 
-export default function PostContent({ id, title, body, user }: Post) {
+interface PostContentModel extends Post {
+    onEditPost: any;
+    onDeletePost: any;
+}
+
+export default function PostContent({ title, body, user, onEditPost, onDeletePost }: PostContentModel) {
     const { user: authUser } = useAuth();
     const { role } = authUser as User;
     const date = formatDate(+new Date());
@@ -19,7 +24,9 @@ export default function PostContent({ id, title, body, user }: Post) {
                 <div className="col-8">
                     <p className="lead">by {user?.name}</p>
                 </div>
-                <div className="col-4 text-right">{role === UserRole.Admin && <PostActions id={id} />}</div>
+                <div className="col-4 text-right">
+                    {role === UserRole.Admin && <PostActions onEditPost={onEditPost} onDeletePost={onDeletePost} />}
+                </div>
             </div>
             <hr />
             <p>Posted on {date}</p>
@@ -32,10 +39,11 @@ export default function PostContent({ id, title, body, user }: Post) {
 }
 
 PostContent.propTypes = {
-    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     user: PropTypes.shape({
         name: PropTypes.string,
     }),
+    onEditPost: PropTypes.func.isRequired,
+    onDeletePost: PropTypes.func.isRequired,
 };

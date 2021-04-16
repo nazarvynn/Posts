@@ -1,8 +1,9 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
-import { useFetchData } from '../../../relay/hooks';
+import { useFetchData, useMutationData } from '../../../relay/hooks';
 import { PostFullQuery } from '../../../relay/queries';
+import { DeletePostMutation } from '../../../relay/mutations';
 import { Comment } from '../../../core/models';
 import Loader from '../../../components/Loader/Loader';
 import PostContent from './PostContent/PostContent';
@@ -10,10 +11,22 @@ import CommentForm from './CommentForm/CommentForm';
 import CommentList from './CommentList/CommentList';
 
 export default function ViewPostPage() {
+    const history = useHistory();
     const { id: postId } = (useParams() as unknown) as { id: string };
     const { data: post, loading }: { data: any; loading: boolean } = useFetchData(PostFullQuery, {
         queryVariables: { id: postId },
     });
+    const { loading: deleting, mutate } = useMutationData(DeletePostMutation);
+    const onEditPost = () => {
+        history.push(`/edit-post/${postId}`);
+    };
+    const onDeletePost = () => {
+        mutate({ id: postId }).then(({ deletePost }: any) => {
+            if (deletePost) {
+                history.push('/posts');
+            }
+        });
+    };
     const onCommentFormSubmit = ({ name, body }: { name: string; body: string }) => {
         const comment: Comment = {
             name,
@@ -24,10 +37,10 @@ export default function ViewPostPage() {
 
     return (
         <>
-            {loading && <Loader />}
+            {(loading || deleting) && <Loader />}
             {!loading && post && (
                 <>
-                    <PostContent {...post} id={postId} />
+                    <PostContent {...post} onEditPost={onEditPost} onDeletePost={onDeletePost} />
                     <hr />
                     <CommentForm onSubmit={onCommentFormSubmit} />
                     <CommentList comments={post?.comments?.data} />

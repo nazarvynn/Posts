@@ -2,9 +2,9 @@ import React from 'react';
 
 import { useMutationData } from '../../../relay/hooks';
 import { CreatePostMutation } from '../../../relay/mutations';
+import Loader from '../../../components/Loader/Loader';
 import { Post } from '../../../core/models';
 import FormPage from '../PostForm/FormPage';
-import Loader from '../../../components/Loader/Loader';
 
 export default function CreatePostPage() {
     const { loading: creating, mutate } = useMutationData(CreatePostMutation);
