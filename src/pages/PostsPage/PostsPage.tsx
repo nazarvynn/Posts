@@ -9,7 +9,7 @@ import Pagination from './Pagination/Pagination';
 
 export default function PostsPage() {
     const PAGE_SIZE = 3;
-    const { data: posts, loading, totalCount, activePage, loadByPage } = useFetchData(PostsQuery, {
+    const { data: posts, loading, totalCount, activePage, fetchByPage } = useFetchData(PostsQuery, {
         pageSize: PAGE_SIZE,
     });
 
@@ -23,7 +23,7 @@ export default function PostsPage() {
                     <Pagination
                         activePage={activePage}
                         pagesCount={Math.ceil(totalCount / PAGE_SIZE)}
-                        onPageChange={(page) => loadByPage(page)}
+                        onPageChange={fetchByPage}
                     />
                 </>
             )}

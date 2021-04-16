@@ -1,27 +1,30 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useMutation } from 'react-relay/hooks';
 
-export default function useMutationData(query: any, inputData: any, id?: number) {
-    const input = useMemo(() => inputData, [inputData]);
+export default function useMutationData(query: any) {
     const [data, setData] = useState(null);
     const [commit, isInFlight] = useMutation(query);
 
-    useEffect(() => {
-        input &&
-            commit({
-                variables: {
-                    id,
-                    input: {
-                        ...input,
-                    },
+    const mutate = useCallback(
+        (inputData: any, id?: string) => {
+            const updateId = id ? { id } : {};
+            const variables = {
+                ...updateId,
+                input: {
+                    ...inputData,
                 },
+            };
+            commit({
+                variables,
                 onCompleted(data) {
                     setData(data);
                 },
             });
-    }, [commit, id, input]);
-
+        },
+        [commit]
+    );
     return {
+        mutate,
         data,
         loading: isInFlight,
     };

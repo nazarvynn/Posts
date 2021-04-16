@@ -13,8 +13,6 @@ export default function useFetchData(
 ) {
     const [variables, setVariables] = useState({ ...queryVariables }) as any;
     const [page, setPage] = useState(1);
-    const nextPage = () => setPage(page + 1);
-    const prevPage = () => setPage(page - 1);
     const [isInitiallyEmpty, setIsInitiallyEmpty] = useState(false);
     const [isInitiallyLoaded, setIsInitiallyLoaded] = useState(false);
 
@@ -34,10 +32,12 @@ export default function useFetchData(
         const { totalCount } = response ? response[dataKey]?.meta || { totalCount: 0 } : { totalCount: 0 };
         setData(() => ({ isLoading: false, data, totalCount }));
     };
-    const refetch = useCallback((variables) => {
+    const fetch = useCallback((variables) => {
         setVariables(variables);
     }, []);
-    const loadByPage = useCallback((page: number = 1) => {
+    const nextPage = () => setPage(page + 1);
+    const prevPage = () => setPage(page - 1);
+    const fetchByPage = useCallback((page: number = 1) => {
         setPage(page);
     }, []);
 
@@ -83,7 +83,7 @@ export default function useFetchData(
         isInitiallyLoaded,
         nextPage,
         prevPage,
-        loadByPage,
-        refetch,
+        fetchByPage,
+        fetch,
     };
 }

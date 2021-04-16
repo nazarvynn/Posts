@@ -6,6 +6,7 @@ import PrivateRoute from '../auth/PrivateRoute';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import Loader from '../components/Loader/Loader';
 import MainLayout from '../layouts/MainLayout/MainLayout';
+// Try to move all files to "private.module.ts" with export default {...all_components}
 const PostsPage = lazy(() => import(/* webpackPrefetch: true */ '../pages/PostsPage/PostsPage'));
 const CreatePostPage = lazy(() => import('../pages/PostPage/CreatePostPage/CreatePostPage'));
 const UpdatePostPage = lazy(() => import('../pages/PostPage/UpdatePostPage/UpdatePostPage'));
@@ -53,6 +54,7 @@ export default function AppRouter() {
                         </PrivateRoute>
                     </Suspense>
                 </MainLayout>
+                <Route path="*" render={() => (auth?.user ? <Redirect to="/posts" /> : <Redirect to="/auth" />)} />
             </Switch>
         </Router>
     );
