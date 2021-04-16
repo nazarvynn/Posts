@@ -39,7 +39,7 @@ export default function useFetchData(
         setData(() => ({ isLoading: false, data, totalCount }));
         // promiseFn = resolveFn(data);
     };
-    const fetch = useCallback((variables) => {
+    const refetch = useCallback((variables) => {
         setVariables(variables);
         // return new Promise(promiseFn);
     }, []);
@@ -95,6 +95,6 @@ export default function useFetchData(
         nextPage,
         prevPage,
         fetchByPage,
-        fetch,
+        refetch,
     };
 }

@@ -13,9 +13,12 @@ import CommentList from './CommentList/CommentList';
 export default function ViewPostPage() {
     const history = useHistory();
     const { id: postId } = (useParams() as unknown) as { id: string };
-    const { data: post, loading }: { data: any; loading: boolean } = useFetchData(PostFullQuery, {
-        queryVariables: { id: postId },
-    });
+    const { data: post, loading, refetch }: { data: any; loading: boolean; refetch: any } = useFetchData(
+        PostFullQuery,
+        {
+            queryVariables: { id: postId },
+        }
+    );
     const { loading: deleting, mutate: deletePostMutation } = useMutationData(DeletePostMutation);
     const { loading: commenting, mutate: createCommentMutation } = useMutationData(CreateCommentMutation);
     const onEditPost = () => {
@@ -32,6 +35,7 @@ export default function ViewPostPage() {
         createCommentMutation({ input: { ...comment } }).then(({ createComment }: any) => {
             if (createComment) {
                 resetForm();
+                refetch({ id: postId });
             }
         });
     };
