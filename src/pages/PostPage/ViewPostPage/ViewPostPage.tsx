@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { useFetchData, useMutationData } from '../../../relay/hooks';
 import { PostFullQuery } from '../../../relay/queries';
-import { DeletePostMutation } from '../../../relay/mutations';
+import { DeletePostMutation, CreateCommentMutation } from '../../../relay/mutations';
 import { Comment } from '../../../core/models';
 import Loader from '../../../components/Loader/Loader';
 import PostContent from './PostContent/PostContent';
@@ -16,23 +16,22 @@ export default function ViewPostPage() {
     const { data: post, loading }: { data: any; loading: boolean } = useFetchData(PostFullQuery, {
         queryVariables: { id: postId },
     });
-    const { loading: deleting, mutate } = useMutationData(DeletePostMutation);
+    const { loading: deleting, mutate: deletePostMutation } = useMutationData(DeletePostMutation);
+    const { loading: commenting, mutate: createCommentMutation } = useMutationData(CreateCommentMutation);
     const onEditPost = () => {
         history.push(`/edit-post/${postId}`);
     };
     const onDeletePost = () => {
-        mutate({ id: postId }).then(({ deletePost }: any) => {
+        deletePostMutation({ id: postId }).then(({ deletePost }: any) => {
             if (deletePost) {
                 history.push('/posts');
             }
         });
     };
-    const onCommentFormSubmit = ({ name, body }: { name: string; body: string }) => {
-        const comment: Comment = {
-            name,
-            body,
-        };
-        console.log('comment', postId, comment);
+    const onCommentFormSubmit = (comment: Comment) => {
+        createCommentMutation({ input: { ...comment } }).then(() => {
+            // clear <CommentForm />
+        });
     };
 
     return (
@@ -43,6 +42,7 @@ export default function ViewPostPage() {
                     <PostContent {...post} onEditPost={onEditPost} onDeletePost={onDeletePost} />
                     <hr />
                     <CommentForm onSubmit={onCommentFormSubmit} />
+                    {commenting && <Loader />}
                     <CommentList comments={post?.comments?.data} />
                 </>
             )}

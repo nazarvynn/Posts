@@ -1,3 +1,4 @@
+import { CreateCommentMutation } from './Comments';
 import { CreatePostMutation, UpdatePostMutation, DeletePostMutation } from './Posts';
 
-export { CreatePostMutation, UpdatePostMutation, DeletePostMutation };
+export { CreateCommentMutation, CreatePostMutation, UpdatePostMutation, DeletePostMutation };
