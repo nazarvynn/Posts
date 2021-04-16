@@ -28,9 +28,11 @@ export default function ViewPostPage() {
             }
         });
     };
-    const onCommentFormSubmit = (comment: Comment) => {
-        createCommentMutation({ input: { ...comment } }).then(() => {
-            // clear <CommentForm />
+    const onCommentFormSubmit = (comment: Comment, { resetForm }: any) => {
+        createCommentMutation({ input: { ...comment } }).then(({ createComment }: any) => {
+            if (createComment) {
+                resetForm();
+            }
         });
     };
 
