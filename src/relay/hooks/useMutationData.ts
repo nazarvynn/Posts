@@ -6,19 +6,24 @@ export default function useMutationData(query: any) {
     const [commit, isInFlight] = useMutation(query);
 
     const mutate = useCallback(
-        (inputData: any, id?: string) => {
-            const updateId = id ? { id } : {};
+        ({ id, input }: { id?: string; input?: any }) => {
+            const idObj = id ? { id } : {};
+            const inputObj = input ? { input: { ...input } } : {};
             const variables = {
-                ...updateId,
-                input: {
-                    ...inputData,
-                },
+                ...idObj,
+                ...inputObj,
             };
-            commit({
-                variables,
-                onCompleted(data) {
-                    setData(data);
-                },
+            return new Promise((resolve, reject) => {
+                commit({
+                    variables,
+                    onCompleted(data) {
+                        setData(data);
+                        resolve(data);
+                    },
+                    onError(error) {
+                        reject(error);
+                    },
+                });
             });
         },
         [commit]

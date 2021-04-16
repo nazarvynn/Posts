@@ -7,6 +7,7 @@ import ConfirmModal from '../../../../components/ConfirmModal/ConfirmModal';
 export default function PostActions({ id }: { id: string }) {
     const [showModal, setShowModal] = useState(false);
     const history = useHistory();
+
     const onDeletePost = () => {
         setShowModal(false);
         console.log('delete confirmed', id);

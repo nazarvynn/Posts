@@ -20,6 +20,12 @@ export default function useFetchData(
     const setIsLoading = () => {
         setData(({ data, totalCount }) => ({ isLoading: true, data, totalCount }));
     };
+    // const resolveFn = (data: any) => {
+    //     return (resolve: any) => {
+    //         resolve(data);
+    //     };
+    // };
+    // let promiseFn: any;
     const storeData = (response: any = {}) => {
         const dataKeys = Object.keys(response || {});
         if (dataKeys?.length > 1) {
@@ -31,9 +37,11 @@ export default function useFetchData(
         const data = response[dataKey]?.data || response[dataKey];
         const { totalCount } = response ? response[dataKey]?.meta || { totalCount: 0 } : { totalCount: 0 };
         setData(() => ({ isLoading: false, data, totalCount }));
+        // promiseFn = resolveFn(data);
     };
     const fetch = useCallback((variables) => {
         setVariables(variables);
+        // return new Promise(promiseFn);
     }, []);
     const nextPage = () => setPage(page + 1);
     const prevPage = () => setPage(page - 1);
@@ -53,7 +61,10 @@ export default function useFetchData(
             },
             { fetchPolicy: 'network-only' }
         ).subscribe({
+            start: () => {},
             next: storeData,
+            complete: () => {},
+            error: () => {},
         });
         return () => {
             subscription$.unsubscribe();

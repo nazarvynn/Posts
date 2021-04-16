@@ -1,6 +1,4 @@
-import PhotosQuery from './PhotosQuery';
-import PostFullQuery from './PostFullQuery';
-import PostQuery from './PostQuery';
-import PostsQuery from './PostsQuery';
+import { PhotosQuery } from './Photos';
+import { PostFullQuery, PostQuery, PostsQuery } from './Posts';
 
 export { PhotosQuery, PostFullQuery, PostQuery, PostsQuery };

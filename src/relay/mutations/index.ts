@@ -1,3 +1,3 @@
-import PostMutation from './PostMutation';
+import { CreatePostMutation, UpdatePostMutation, DeletePostMutation } from './Posts';
 
-export { PostMutation };
+export { CreatePostMutation, UpdatePostMutation, DeletePostMutation };

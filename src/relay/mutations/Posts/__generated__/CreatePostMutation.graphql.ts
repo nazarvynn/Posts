@@ -3,34 +3,34 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
-export type UpdatePostInput = {
-    title?: string | null;
-    body?: string | null;
+export type CreatePostInput = {
+    title: string;
+    body: string;
 };
-export type PostMutationVariables = {
-    id: string;
-    input: UpdatePostInput;
+export type CreatePostMutationVariables = {
+    input: CreatePostInput;
 };
-export type PostMutationResponse = {
-    readonly updatePost: {
+export type CreatePostMutationResponse = {
+    readonly createPost: {
         readonly id: string | null;
+        readonly title: string | null;
         readonly body: string | null;
     } | null;
 };
-export type PostMutation = {
-    readonly response: PostMutationResponse;
-    readonly variables: PostMutationVariables;
+export type CreatePostMutation = {
+    readonly response: CreatePostMutationResponse;
+    readonly variables: CreatePostMutationVariables;
 };
 
 
 
 /*
-mutation PostMutation(
-  $id: ID!
-  $input: UpdatePostInput!
+mutation CreatePostMutation(
+  $input: CreatePostInput!
 ) {
-  updatePost(id: $id, input: $input) {
+  createPost(input: $input) {
     id
+    title
     body
   }
 }
@@ -38,11 +38,6 @@ mutation PostMutation(
 
 const node: ConcreteRequest = (function(){
 var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "id"
-  },
   {
     "defaultValue": null,
     "kind": "LocalArgument",
@@ -55,18 +50,13 @@ v1 = [
     "args": [
       {
         "kind": "Variable",
-        "name": "id",
-        "variableName": "id"
-      },
-      {
-        "kind": "Variable",
         "name": "input",
         "variableName": "input"
       }
     ],
     "concreteType": "Post",
     "kind": "LinkedField",
-    "name": "updatePost",
+    "name": "createPost",
     "plural": false,
     "selections": [
       {
@@ -74,6 +64,13 @@ v1 = [
         "args": null,
         "kind": "ScalarField",
         "name": "id",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "title",
         "storageKey": null
       },
       {
@@ -92,7 +89,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "PostMutation",
+    "name": "CreatePostMutation",
     "selections": (v1/*: any*/),
     "type": "Mutation",
     "abstractKey": null
@@ -101,18 +98,18 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "PostMutation",
+    "name": "CreatePostMutation",
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "3f846a3d0fd2348b454baa28de88c764",
+    "cacheID": "42ebe8e8dd832f8abc79fbebd5563420",
     "id": null,
     "metadata": {},
-    "name": "PostMutation",
+    "name": "CreatePostMutation",
     "operationKind": "mutation",
-    "text": "mutation PostMutation(\n  $id: ID!\n  $input: UpdatePostInput!\n) {\n  updatePost(id: $id, input: $input) {\n    id\n    body\n  }\n}\n"
+    "text": "mutation CreatePostMutation(\n  $input: CreatePostInput!\n) {\n  createPost(input: $input) {\n    id\n    title\n    body\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = 'e6e3b9d892883f91c6cecf5eb6805df4';
+(node as any).hash = 'a255a80d339284b5abec93c7085e189c';
 export default node;

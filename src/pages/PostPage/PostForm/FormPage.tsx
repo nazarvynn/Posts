@@ -11,7 +11,15 @@ const LoginFormSchema = Yup.object().shape({
     email: Yup.string().required('Required'),
 });
 
-export default function FormPage({ formData, onSubmit }: { formData?: Post; onSubmit: any }) {
+export default function FormPage({
+    formData,
+    loading,
+    onSubmit,
+}: {
+    formData?: Post;
+    loading: boolean;
+    onSubmit: any;
+}) {
     const initialState = formData
         ? { title: formData.title, body: formData.body, email: formData.user.email }
         : { title: '', email: '', body: '' };
@@ -43,7 +51,10 @@ export default function FormPage({ formData, onSubmit }: { formData?: Post; onSu
                             />
                             {isInvalidBody && <div className="invalid-feedback">{errors.body}</div>}
                         </div>
-                        <button type="submit" className="btn btn-primary btn-lg submit-button">
+                        <button
+                            type="submit"
+                            className={`btn btn-primary btn-lg submit-button ${loading ? 'disabled' : ''}`}
+                        >
                             Submit
                         </button>
                     </Form>
@@ -60,5 +71,6 @@ FormPage.propTypes = {
             name: PropTypes.string,
         }),
     }),
+    loading: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
 };
