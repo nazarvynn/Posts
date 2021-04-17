@@ -1,3 +1,4 @@
 import CommentsQuery from './CommentsQuery';
+import PostCommentsQuery from './PostCommentsQuery';
 
-export { CommentsQuery };
+export { CommentsQuery, PostCommentsQuery };
