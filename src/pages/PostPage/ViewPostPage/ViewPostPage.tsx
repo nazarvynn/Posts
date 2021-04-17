@@ -3,24 +3,19 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { useFetchData, useMutationData } from '../../../relay/hooks';
 import { PostFullQuery } from '../../../relay/queries';
-import { DeletePostMutation, CreateCommentMutation } from '../../../relay/mutations';
-import { Comment } from '../../../core/models';
+import { DeletePostMutation } from '../../../relay/mutations';
 import Loader from '../../../components/Loader/Loader';
 import PostContent from './PostContent/PostContent';
-import CommentForm from './CommentForm/CommentForm';
-import CommentList from './CommentList/CommentList';
+import CommentsSection from './CommentsSection/CommentsSection';
 
 export default function ViewPostPage() {
     const history = useHistory();
     const { id: postId } = (useParams() as unknown) as { id: string };
-    const { data: post, loading, refetch }: { data: any; loading: boolean; refetch: any } = useFetchData(
-        PostFullQuery,
-        {
-            queryVariables: { id: postId },
-        }
-    );
+    const { data: post, loading }: { data: any; loading: boolean } = useFetchData(PostFullQuery, {
+        queryVariables: { id: postId },
+    });
     const { loading: deleting, mutate: deletePostMutation } = useMutationData(DeletePostMutation);
-    const { loading: commenting, mutate: createCommentMutation } = useMutationData(CreateCommentMutation);
+
     const onEditPost = () => {
         history.push(`/edit-post/${postId}`);
     };
@@ -28,14 +23,6 @@ export default function ViewPostPage() {
         deletePostMutation({ id: postId }).then(({ deletePost }: any) => {
             if (deletePost) {
                 history.push('/posts');
-            }
-        });
-    };
-    const onCommentFormSubmit = (comment: Comment, { resetForm }: any) => {
-        createCommentMutation({ input: { ...comment } }).then(({ createComment }: any) => {
-            if (createComment) {
-                resetForm();
-                refetch({ id: postId });
             }
         });
     };
@@ -47,9 +34,7 @@ export default function ViewPostPage() {
                 <>
                     <PostContent {...post} onEditPost={onEditPost} onDeletePost={onDeletePost} />
                     <hr />
-                    <CommentForm onSubmit={onCommentFormSubmit} />
-                    {commenting && <Loader />}
-                    <CommentList comments={post?.comments?.data} />
+                    <CommentsSection id={postId} />
                 </>
             )}
         </>
