@@ -1,6 +1,7 @@
 export * from './AuthData';
 export * from './Category';
 export * from './Comment';
+export * from './CommentsState';
 export * from './Gallery';
 export * from './NavigationItem';
 export * from './PaginationItem';

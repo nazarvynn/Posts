@@ -1,5 +1,5 @@
 export interface Comment {
     body: string;
-    email?: string;
-    name?: string;
+    email: string;
+    name: string;
 }
