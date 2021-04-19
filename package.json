@@ -44,7 +44,12 @@
         "build": "npm run relay && react-scripts build",
         "relay": "relay-compiler --schema schema.graphql --language typescript --src ./src/ --watchman false $@",
         "test": "react-scripts test",
+        "test:single": "react-scripts test --watchAll=false",
+        "test:coverage": "react-scripts test --watchAll=false --coverage",
         "eject": "react-scripts eject"
+    },
+    "jest": {
+        "coverageReporters": ["text-summary", "lcov"]
     },
     "eslintConfig": {
         "extends": [
