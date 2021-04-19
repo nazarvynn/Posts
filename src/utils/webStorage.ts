@@ -50,6 +50,6 @@ function getValue(key: string, isSessionStorage: boolean): any {
     return value || null;
 }
 
-function getStorage(isSessionStorage?: boolean): any {
+export function getStorage(isSessionStorage?: boolean): any {
     return isSessionStorage ? sessionStorage : localStorage;
 }

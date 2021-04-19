@@ -49,7 +49,10 @@
         "eject": "react-scripts eject"
     },
     "jest": {
-        "coverageReporters": ["text-summary", "lcov"]
+        "coverageReporters": [
+            "text-summary",
+            "lcov"
+        ]
     },
     "eslintConfig": {
         "extends": [

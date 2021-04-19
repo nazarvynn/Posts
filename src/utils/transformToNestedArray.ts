@@ -1,4 +1,4 @@
-export default function transformToNestedArray(data: any, skipFields: string[]): any[][] {
+export default function transformToNestedArray(data: any, skipFields: string[] = []): any[][] {
     if (!data?.length) {
         return [];
     }
