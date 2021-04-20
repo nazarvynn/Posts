@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useFetchData, useMutationData } from '../../../relay/hooks';
-import { PostFullQuery } from '../../../relay/queries';
-import { DeletePostMutation } from '../../../relay/mutations';
+import { RootState } from '../../../store/store';
+import { fetchPostById, removePost, selectPostById } from '../../../store';
 import Loader from '../../../components/Loader/Loader';
 import PostContent from './PostContent/PostContent';
 import CommentsSection from './CommentsSection/CommentsSection';
@@ -11,26 +11,33 @@ import CommentsSection from './CommentsSection/CommentsSection';
 export default function ViewPostPage() {
     const history = useHistory();
     const { id: postId } = (useParams() as unknown) as { id: string };
-    const { data: post, loading }: { data: any; loading: boolean } = useFetchData(PostFullQuery, {
-        queryVariables: { id: postId },
-    });
-    const { loading: deleting, mutate: deletePostMutation } = useMutationData(DeletePostMutation);
+    const { post, loading } = useSelector((state: RootState) => selectPostById(state, postId));
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (!post) {
+            dispatch(fetchPostById(postId));
+        }
+    }, [dispatch, post, postId]);
 
     const onEditPost = () => {
         history.push(`/edit-post/${postId}`);
     };
     const onDeletePost = () => {
-        deletePostMutation({ id: postId }).then(({ deletePost }: any) => {
-            if (deletePost) {
-                history.push('/posts');
-            }
-        });
+        dispatch(removePost({ id: postId }));
+        history.push('/posts');
+        // TODO: question
+        // deletePostMutation({ id: postId }).then(({ deletePost }: any) => {
+        //     if (deletePost) {
+        //         history.push('/posts');
+        //     }
+        // });
     };
 
     return (
         <>
-            {(loading || deleting) && <Loader />}
-            {!loading && post && (
+            {loading && <Loader />}
+            {post && (
                 <>
                     <PostContent {...post} onEditPost={onEditPost} onDeletePost={onDeletePost} />
                     <hr />

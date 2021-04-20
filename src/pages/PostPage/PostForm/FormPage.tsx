@@ -8,7 +8,8 @@ import { Post } from '../../../core/models';
 const LoginFormSchema = Yup.object().shape({
     title: Yup.string().required('Required'),
     body: Yup.string().required('Required'),
-    email: Yup.string().required('Required'),
+    userName: Yup.string().required('Required'),
+    userEmail: Yup.string().required('Required'),
 });
 
 export default function FormPage({
@@ -17,18 +18,19 @@ export default function FormPage({
     onSubmit,
 }: {
     formData?: Post;
-    loading: boolean;
+    loading?: boolean;
     onSubmit: any;
 }) {
     const initialState = formData
-        ? { title: formData.title, body: formData.body, email: formData.user.email }
-        : { title: '', email: '', body: '' };
+        ? { title: formData.title, body: formData.body, userName: formData.user.name, userEmail: formData.user.email }
+        : { title: '', body: '', userName: '', userEmail: '' };
     return (
         <Formik initialValues={initialState} validationSchema={LoginFormSchema} onSubmit={onSubmit}>
             {({ errors, touched }) => {
                 const isInvalidTitle = errors.title && touched.title;
-                const isInvalidEmail = errors.email && touched.email;
                 const isInvalidBody = errors.body && touched.body;
+                const isInvalidUserName = errors.userName && touched.userName;
+                const isInvalidUserEmail = errors.userEmail && touched.userEmail;
                 return (
                     <Form>
                         <div className="form-group">
@@ -37,9 +39,14 @@ export default function FormPage({
                             {isInvalidTitle && <div className="invalid-feedback">{errors.title}</div>}
                         </div>
                         <div className="form-group">
-                            <label>Email</label>
-                            <Field name="email" className={`form-control ${isInvalidEmail && 'is-invalid'}`} />
-                            {isInvalidEmail && <div className="invalid-feedback">{errors.email}</div>}
+                            <label>User Name</label>
+                            <Field name="userName" className={`form-control ${isInvalidUserName && 'is-invalid'}`} />
+                            {isInvalidUserName && <div className="invalid-feedback">{errors.userName}</div>}
+                        </div>
+                        <div className="form-group">
+                            <label>User Email</label>
+                            <Field name="userEmail" className={`form-control ${isInvalidUserEmail && 'is-invalid'}`} />
+                            {isInvalidUserEmail && <div className="invalid-feedback">{errors.userEmail}</div>}
                         </div>
                         <div className="form-group">
                             <label>Content</label>
@@ -69,8 +76,9 @@ FormPage.propTypes = {
         body: PropTypes.string.isRequired,
         user: PropTypes.shape({
             name: PropTypes.string,
+            email: PropTypes.string,
         }),
     }),
-    loading: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    loading: PropTypes.bool,
 };

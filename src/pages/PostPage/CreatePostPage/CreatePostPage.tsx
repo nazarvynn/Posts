@@ -1,23 +1,32 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { useMutationData } from '../../../relay/hooks';
-import { CreatePostMutation } from '../../../relay/mutations';
-import Loader from '../../../components/Loader/Loader';
-import { Post } from '../../../core/models';
+import { createPost } from '../../../store';
 import FormPage from '../PostForm/FormPage';
 
 export default function CreatePostPage() {
-    const { loading: creating, mutate } = useMutationData(CreatePostMutation);
-    const onCreate = ({ title, body }: Post) => {
-        mutate({ input: { title, body } }).then((newPost) => {
-            console.log('newPost', newPost);
-        });
+    const dispatch = useDispatch();
+    const onCreate = (
+        {
+            title,
+            body,
+            userName,
+            userEmail,
+        }: {
+            title: string;
+            body: string;
+            userName: string;
+            userEmail: string;
+        },
+        { resetForm }: any
+    ) => {
+        dispatch(createPost({ post: { title, body, user: { name: userName, email: userEmail } } }));
+        resetForm();
     };
     return (
         <>
             <h1 className="my-4 page-tile">Create Post</h1>
-            {creating && <Loader />}
-            <FormPage onSubmit={onCreate} loading={creating} />
+            <FormPage onSubmit={onCreate} />
         </>
     );
 }

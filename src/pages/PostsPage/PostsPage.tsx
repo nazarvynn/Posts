@@ -1,17 +1,19 @@
-import React from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useFetchData } from '../../relay/hooks';
-import { PostsQuery } from '../../relay/queries';
+import { RootState } from '../../store/store';
+import { fetchPostsByPage } from '../../store';
 import Loader from '../../components/Loader/Loader';
 import PostsList from './PostsList/PostsList';
-import Pagination from './Pagination/Pagination';
 
 export default function PostsPage() {
     const PAGE_SIZE = 3;
-    const { data: posts, loading, totalCount, activePage, fetchByPage } = useFetchData(PostsQuery, {
-        pageSize: PAGE_SIZE,
-    });
+    const { posts, loading } = useSelector((state: RootState) => state.posts);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchPostsByPage({ page: 1, pageSize: PAGE_SIZE }));
+    }, [dispatch]);
 
     return (
         <>
@@ -20,11 +22,6 @@ export default function PostsPage() {
             {!loading && posts?.length && (
                 <>
                     <PostsList posts={posts} />
-                    <Pagination
-                        activePage={activePage}
-                        pagesCount={Math.ceil(totalCount / PAGE_SIZE)}
-                        onPageChange={fetchByPage}
-                    />
                 </>
             )}
         </>
