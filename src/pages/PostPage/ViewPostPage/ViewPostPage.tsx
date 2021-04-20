@@ -14,6 +14,7 @@ export default function ViewPostPage() {
     const { post, loading } = useSelector((state: RootState) => selectPostById(state, postId));
     const dispatch = useDispatch();
 
+    // TODO: question
     useEffect(() => {
         if (!post) {
             dispatch(fetchPostById(postId));
