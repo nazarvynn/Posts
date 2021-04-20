@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { PostsState } from '../../core/models';
-import { fetchPostsByPage } from '../../relay/services';
+import { PostsStub } from '../../stubs';
 
 const initialState: PostsState = {
     posts: [],
@@ -11,7 +11,7 @@ const initialState: PostsState = {
 };
 
 export const getPostsByPage = createAsyncThunk('users/fetchByIdStatus', async (page: number) => {
-    return await fetchPostsByPage(page).toPromise();
+    return PostsStub;
 });
 
 export const postsSlice = createSlice({
