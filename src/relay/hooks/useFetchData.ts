@@ -12,20 +12,15 @@ export default function useFetchData(
     }: { queryVariables?: any; pageSize?: number; onErrorUrl?: string }
 ) {
     const [variables, setVariables] = useState({ ...queryVariables }) as any;
+    const [data, setData] = useState({ isLoading: false, data: null, totalCount: 0 });
     const [page, setPage] = useState(1);
     const [isInitiallyEmpty, setIsInitiallyEmpty] = useState(false);
     const [isInitiallyLoaded, setIsInitiallyLoaded] = useState(false);
 
-    const [data, setData] = useState({ isLoading: false, data: null, totalCount: 0 });
     const setIsLoading = () => {
         setData(({ data, totalCount }) => ({ isLoading: true, data, totalCount }));
     };
-    // const resolveFn = (data: any) => {
-    //     return (resolve: any) => {
-    //         resolve(data);
-    //     };
-    // };
-    // let promiseFn: any;
+
     const storeData = (response: any = {}) => {
         const dataKeys = Object.keys(response || {});
         if (dataKeys?.length > 1) {
@@ -37,12 +32,12 @@ export default function useFetchData(
         const data = response[dataKey]?.data || response[dataKey];
         const { totalCount } = response ? response[dataKey]?.meta || { totalCount: 0 } : { totalCount: 0 };
         setData(() => ({ isLoading: false, data, totalCount }));
-        // promiseFn = resolveFn(data);
     };
+
     const refetch = useCallback((variables) => {
         setVariables(variables);
-        // return new Promise(promiseFn);
     }, []);
+
     const nextPage = () => setPage(page + 1);
     const prevPage = () => setPage(page - 1);
     const fetchByPage = useCallback((page: number = 1) => {
