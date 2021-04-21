@@ -14,7 +14,6 @@ export default function ViewPostPage() {
     const { post, loading } = useSelector((state: RootState) => selectPostById(state, postId));
     const dispatch = useDispatch();
 
-    // TODO: question
     useEffect(() => {
         if (!post) {
             dispatch(fetchPostById(postId));
@@ -27,12 +26,6 @@ export default function ViewPostPage() {
     const onDeletePost = () => {
         dispatch(removePost({ id: postId }));
         history.push('/posts');
-        // TODO: question
-        // deletePostMutation({ id: postId }).then(({ deletePost }: any) => {
-        //     if (deletePost) {
-        //         history.push('/posts');
-        //     }
-        // });
     };
 
     return (

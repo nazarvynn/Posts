@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction, createSelector } from '@reduxjs/toolkit';
 import { fetchQuery } from 'react-relay/hooks';
 
 import relayEnvironment from '../../relayEnvironment';
@@ -45,6 +45,7 @@ export const postsSlice = createSlice({
             posts[index] = { ...post };
             state.posts = [...posts];
         },
+        // https://redux-toolkit.js.org/api/createAsyncThunk#unwrapping-result-actions
         removePost: (state: PostsState, action: PayloadAction<{ id: string }>) => {
             const { id: postId } = action.payload;
             const posts = [...state.posts];
@@ -82,12 +83,16 @@ export const postsSlice = createSlice({
     },
 });
 
-// const selectPosts = (state: PostsState) => state.posts;
-export const selectPostById = ({ posts }: RootState, postId: string): { post: Post; loading: boolean } => {
-    const { posts: postsList, loading } = posts;
+const selectPosts = ({ posts }: RootState) => posts;
+const getId = (_: RootState, id: string) => id;
+export const selectPostById = createSelector([selectPosts, getId], (state: PostsState, postId): {
+    post: Post;
+    loading: boolean;
+} => {
+    const { posts: postsList, loading } = state;
     const post = postsList.find(({ id }: Post) => id === postId);
     return { post, loading };
-};
+});
 
 export const { createPost, updatePost, removePost } = postsSlice.actions;
 export default postsSlice.reducer;
