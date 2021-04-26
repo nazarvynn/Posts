@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { Card, Elevation } from '@blueprintjs/core';
 
 import { useAuth } from '../../auth/hooks';
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
@@ -23,11 +24,11 @@ export default function LoginPage() {
 
     return (
         <AuthLayout>
-            <div className="login-container border rounded">
-                <h4 className="text-center">Login</h4>
+            <Card className="login-container" elevation={Elevation.TWO}>
+                <h4 className="bp3-heading text-center">Login</h4>
                 <hr />
                 <LoginForm onLogin={onLogin} />
-            </div>
+            </Card>
         </AuthLayout>
     );
 }

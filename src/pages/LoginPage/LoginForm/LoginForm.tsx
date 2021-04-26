@@ -1,6 +1,6 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { FormGroup, Button, InputGroup, Intent } from '@blueprintjs/core';
 
@@ -16,24 +16,31 @@ export default function LoginForm({ onLogin }: { onLogin: any }) {
     return (
         <Formik initialValues={{ name: '', password: '' }} validationSchema={LoginFormSchema} onSubmit={onLogin}>
             {({ errors, touched }) => {
-                // const isInvalidUserName = errors.name && touched.name;
-                // const isInvalidPassword = errors.password && touched.password;
+                const isInvalidUserName = errors.name && touched.name;
+                const isInvalidPassword = errors.password && touched.password;
+                const userNameIntent = isInvalidUserName ? Intent.DANGER : Intent.NONE;
+                const passwordIntent = isInvalidPassword ? Intent.DANGER : Intent.NONE;
                 return (
                     <Form>
-                        <FormGroup label="User name">
-                            <InputGroup name="name" />
-                            {/*{ className={`form-control ${isInvalidUserName && 'is-invalid'}`}}*/}
-                            {/*{isInvalidUserName && <div className="invalid-feedback">{errors.name}</div>}*/}
+                        <FormGroup
+                            label="User name"
+                            helperText={isInvalidUserName && errors.name}
+                            intent={userNameIntent}
+                        >
+                            <InputGroup name="name" intent={userNameIntent} large={true} />
                         </FormGroup>
-                        <FormGroup label="Password">
-                            <InputGroup name="password" type="password" />
-                            {/*{className={`form-control ${isInvalidPassword && 'is-invalid'}`}}*/}
-                            {/*{isInvalidPassword && <div className="invalid-feedback">{errors.password}</div>}*/}
+                        <FormGroup
+                            label="Password"
+                            helperText={isInvalidPassword && errors.password}
+                            intent={passwordIntent}
+                        >
+                            <InputGroup name="password" type="password" intent={passwordIntent} large={true} />
                         </FormGroup>
-                        <Button type="submit">
-                            {/*{ className="btn btn-primary btn-lg btn-block submit-button"}*/}
-                            Submit
-                        </Button>
+                        <div className="text-center">
+                            <Button className="submit-button" type="submit" intent={Intent.PRIMARY} large={true}>
+                                Submit
+                            </Button>
+                        </div>
                     </Form>
                 );
             }}
