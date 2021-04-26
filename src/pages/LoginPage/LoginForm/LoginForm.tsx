@@ -2,6 +2,7 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { FormGroup, Button, Intent } from '@blueprintjs/core';
 
 const LoginFormSchema = Yup.object().shape({
     // Example:
@@ -19,23 +20,43 @@ export default function LoginForm({ onLogin }: { onLogin: any }) {
                 const isInvalidPassword = errors.password && touched.password;
                 return (
                     <Form>
-                        <div className="form-group">
-                            <label>User name</label>
-                            <Field name="name" className={`form-control ${isInvalidUserName && 'is-invalid'}`} />
-                            {isInvalidUserName && <div className="invalid-feedback">{errors.name}</div>}
+                        {/* TODO: Add custom input component */}
+                        <FormGroup
+                            label="User name"
+                            helperText={isInvalidUserName && errors.name}
+                            intent={isInvalidUserName ? Intent.DANGER : Intent.NONE}
+                        >
+                            <div className="bp3-form-content">
+                                <div
+                                    className={`bp3-input-group bp3-large ${
+                                        isInvalidUserName ? 'bp3-intent-danger' : ''
+                                    }`}
+                                >
+                                    <Field className="bp3-input" name="name" />
+                                </div>
+                            </div>
+                        </FormGroup>
+                        {/* TODO: Add custom input component */}
+                        <FormGroup
+                            label="Password"
+                            helperText={isInvalidPassword && errors.password}
+                            intent={isInvalidPassword ? Intent.DANGER : Intent.NONE}
+                        >
+                            <div className="bp3-form-content">
+                                <div
+                                    className={`bp3-input-group bp3-large ${
+                                        isInvalidPassword ? 'bp3-intent-danger' : ''
+                                    }`}
+                                >
+                                    <Field className="bp3-input" name="password" type="password" />
+                                </div>
+                            </div>
+                        </FormGroup>
+                        <div className="text-center">
+                            <Button className="submit-button" type="submit" intent={Intent.PRIMARY} large={true}>
+                                Submit
+                            </Button>
                         </div>
-                        <div className="form-group">
-                            <label>Password</label>
-                            <Field
-                                name="password"
-                                type="password"
-                                className={`form-control ${isInvalidPassword && 'is-invalid'}`}
-                            />
-                            {isInvalidPassword && <div className="invalid-feedback">{errors.password}</div>}
-                        </div>
-                        <button type="submit" className="btn btn-primary btn-lg btn-block submit-button">
-                            Submit
-                        </button>
                     </Form>
                 );
             }}
