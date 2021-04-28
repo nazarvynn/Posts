@@ -1,5 +1,7 @@
 export enum Page {
-    Home = 'posts',
-    Gallery = 'gallery',
-    About = 'about',
+    HOME = 'posts',
+    CREATE_POST = 'add-post',
+    GALLERY = 'gallery',
+    USERS = 'users',
+    ABOUT = 'about',
 }

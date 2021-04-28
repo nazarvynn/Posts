@@ -6,7 +6,7 @@ import { Page } from '../../core/enums';
 describe('Gallery Page', () => {
     beforeEach(() => {
         cy.authUser(true);
-        cy.navigateTo(Page.Gallery);
+        cy.navigateTo(Page.GALLERY);
     });
     afterEach(() => {
         cy.logout();
