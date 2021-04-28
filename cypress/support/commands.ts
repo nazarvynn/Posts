@@ -13,3 +13,8 @@ import { ADMIN_USER, OBSERVER_USER } from '../fixtures/users';
 Cypress.Commands.add('authUser', (isAdmin?: boolean) => {
     window.sessionStorage.setItem('nv:auth-user', JSON.stringify(isAdmin ? ADMIN_USER : OBSERVER_USER));
 });
+
+Cypress.Commands.add('logout', () => {
+    cy.get('.nav-item.dropdown .nav-link').click();
+    cy.get('.user-menu > li:nth-child(3) .dropdown-item').click();
+});

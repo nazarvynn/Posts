@@ -6,7 +6,11 @@ describe('About Page', () => {
         cy.authUser();
     });
 
-    it('has about contet', () => {
+    afterEach(() => {
+        cy.logout();
+    });
+
+    it("should have 'About' content", () => {
         cy.visit('/about');
 
         cy.contains('About');

@@ -3,9 +3,11 @@
 declare namespace Cypress {
     interface Chainable {
         /**
-         * Custom command to uthentiricate user.
+         * Custom command to authenticate user.
          * @example cy.authUser()
          */
         authUser(isAdmin?: boolean): void;
+
+        logout(): void;
     }
 }
