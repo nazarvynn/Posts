@@ -17,3 +17,8 @@ Cypress.Commands.add('authUser', (isAdmin?: boolean) => {
 Cypress.Commands.add('logout', () => {
     window.sessionStorage.removeItem('nv:auth-user');
 });
+
+Cypress.Commands.add('navigateTo', (page: string) => {
+    cy.visit('/');
+    cy.contains(page).click();
+});

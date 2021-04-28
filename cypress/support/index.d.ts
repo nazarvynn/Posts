@@ -9,5 +9,7 @@ declare namespace Cypress {
         authUser(isAdmin?: boolean): void;
 
         logout(): void;
+
+        navigateTo(page: string): void;
     }
 }
