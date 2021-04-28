@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "baseUrl": "src",
         "target": "es5",
         "lib": [
             "dom",
@@ -19,8 +20,7 @@
         "isolatedModules": true,
         "strictNullChecks": false,
         "noEmit": true,
-        "jsx": "react-jsx",
-        "types": ["cypress"]
+        "jsx": "react-jsx"
     },
     "include": [
         "src"

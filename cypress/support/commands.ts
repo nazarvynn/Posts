@@ -12,10 +12,12 @@ import { ADMIN_USER, OBSERVER_USER } from '../fixtures/users';
 import { Page } from '../core/enums';
 
 Cypress.Commands.add('authUser', (isAdmin?: boolean) => {
+    // @ts-ignore
     window.sessionStorage.setItem('nv:auth-user', JSON.stringify(isAdmin ? ADMIN_USER : OBSERVER_USER));
 });
 
 Cypress.Commands.add('logout', () => {
+    // @ts-ignore
     window.sessionStorage.removeItem('nv:auth-user');
 });
 
