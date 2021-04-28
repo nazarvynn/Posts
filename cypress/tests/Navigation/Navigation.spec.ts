@@ -1,6 +1,6 @@
 import { Page } from '../../core/enums';
 
-describe('', () => {
+describe('Main Navigation', () => {
     beforeEach(() => {
         cy.authUser(true);
     });
@@ -18,5 +18,3 @@ describe('', () => {
         cy.location('pathname').should('eq', '/users');
     });
 });
-
-export {};
