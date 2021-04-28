@@ -22,7 +22,7 @@ describe('Gallery Page', () => {
         cy.get(':nth-child(1) > .d-block > .img-fluid')
             .should('be.visible')
             //.and(([$photo, $photo2]) => {
-            .and(([$photo, $photo2]) => {
+            .and(([$photo]) => {
                 //деструктуризація
                 // "naturalWidth" and "naturalHeight" are set when the image loads
                 expect($photo.naturalWidth).to.be.greaterThan(0);
