@@ -15,6 +15,5 @@ Cypress.Commands.add('authUser', (isAdmin?: boolean) => {
 });
 
 Cypress.Commands.add('logout', () => {
-    cy.get('.nav-item.dropdown .nav-link').click();
-    cy.get('.user-menu > li:nth-child(3) .dropdown-item').click();
+    window.sessionStorage.removeItem('nv:auth-user');
 });
