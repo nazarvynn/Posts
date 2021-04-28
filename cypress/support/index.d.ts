@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { Page } from '../core/enums';
+
 declare namespace Cypress {
     interface Chainable {
         /**
@@ -10,6 +12,6 @@ declare namespace Cypress {
 
         logout(): void;
 
-        navigateTo(page: string): void;
+        navigateTo(page: Page): void;
     }
 }

@@ -9,6 +9,7 @@
 // ***********************************************
 
 import { ADMIN_USER, OBSERVER_USER } from '../fixtures/users';
+import { Page } from '../core/enums';
 
 Cypress.Commands.add('authUser', (isAdmin?: boolean) => {
     window.sessionStorage.setItem('nv:auth-user', JSON.stringify(isAdmin ? ADMIN_USER : OBSERVER_USER));
@@ -18,7 +19,6 @@ Cypress.Commands.add('logout', () => {
     window.sessionStorage.removeItem('nv:auth-user');
 });
 
-Cypress.Commands.add('navigateTo', (page: string) => {
-    cy.visit('/');
-    cy.contains(page).click();
+Cypress.Commands.add('navigateTo', (page: Page) => {
+    cy.visit(`/${page}`);
 });
