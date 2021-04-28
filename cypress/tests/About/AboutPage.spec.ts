@@ -13,5 +13,3 @@ describe('About Page', () => {
         cy.contains('About');
     });
 });
-
-export {};

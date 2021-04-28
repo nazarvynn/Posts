@@ -1,5 +1,4 @@
-// type definitions for custom commands
-/// <reference types="../../support" />
+/* eslint-disable jest/valid-expect */
 /// <reference no-default-lib="true"/>
 import { Page } from '../../core/enums';
 
@@ -32,5 +31,3 @@ describe('Gallery Page', () => {
             });
     });
 });
-
-export {};

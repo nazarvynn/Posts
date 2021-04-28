@@ -1,7 +1,8 @@
-// type definitions for custom commands
-/// <reference types="../../support" />
-
 describe('User Security', () => {
+    afterEach(() => {
+        cy.logout();
+    });
+
     it('should show admin specific content', () => {
         cy.authUser(true);
         cy.visit('/');
@@ -22,5 +23,3 @@ describe('User Security', () => {
         cy.get('.nav-item').should('have.length', '4');
     });
 });
-
-export {};
