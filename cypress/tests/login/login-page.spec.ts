@@ -1,3 +1,4 @@
+// @ts-ignore
 import LoginPage from '../../core/pages/LoginPage';
 
 describe('Login Page', () => {
