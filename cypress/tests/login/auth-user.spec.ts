@@ -1,4 +1,8 @@
+import LoginPage from '../../core/pages/LoginPage';
+
 describe('Authenticate User', () => {
+    const loginPage = new LoginPage();
+
     afterEach(() => {
         cy.logout();
     });
@@ -8,9 +12,9 @@ describe('Authenticate User', () => {
 
         cy.contains('Login');
 
-        cy.get('input[name="name"]').type('admin');
-        cy.get('input[name="password"]').type('password1');
-        cy.get('button[type="submit"]').click();
+        loginPage.fillName('admin');
+        loginPage.fillPassword('password1');
+        loginPage.submit();
 
         cy.contains('Posts');
     });
